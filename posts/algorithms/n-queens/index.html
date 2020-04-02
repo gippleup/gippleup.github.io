@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>N-Queens&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.0463b7141b237063ffb57ebf04d5d4539abf4436f5ad8cfc591c9181944fbeff356edf1b0eb06a3d46a265d0f1fefaae.css" integrity="sha384-BGO3FBsjcGP/tX6/BNXUU5q/RDb1rYz8WRyRgZRPvv81bt8bDrBqPUaiZdDx/vqu"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">N-Queens</h1><p class="article date">Apr 02, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>The time-complexity for brute force approach to N-Queens is N<sup>n</sup>.</p></p>
+</blockquote>
+<h1 id="what-is-n-queens">What is N-Queens?</h1>
+<p><a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle"target="_blank">Eight-Queens</a> is fairly old puzzle question which has been proposed in 1848. N-Queens is exteded version of Eight-Queens.</p>
+<h2 id="brute-force-approach">Brute force approach</h2>
+<p>Worst approach to N-Queens is making all possible boards and filtering them afterward. In this case, time-complexity is O(N<sup>n</sup>). Which becomes huge like crazy.</p>
+<div class="center-content">
+<table class="center-content">
+  <tr>
+    <th>N</th>
+    <th>N<sup>n</sup></th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>4</td>
+  </tr><tr>
+    <td>3</td>
+    <td>27</td>
+  </tr><tr>
+    <td>4</td>
+    <td>256</td>
+  </tr><tr>
+    <td>5</td>
+    <td>3125</td>
+  </tr><tr>
+  </tr><tr>
+    <td>...</td>
+    <td>...</td>
+  </tr><tr>
+    <td>8</td>
+    <td>16777216</td>
+  </tr>
+</table>
+</div>
+<p>Because there are too many useless boards, this is total waste.</p>
+<h2 id="backtracking">Backtracking</h2>
+<p><a href="https://en.wikipedia.org/wiki/Backtracking"target="_blank">Backtracking</a> can help us. To simply put, backtracking is about setting rules for throwing out useless choices.</p>
+<p>In this case, we can set these two basic rules.</p>
+<ul>
+<li>If there is any collision between queens, find another position.</li>
+<li>If there is any row that has no possible position to put, throw away the board.</li>
+</ul>
+<p>With these rules implemented in our code, we can get solution for N-Queens when N equals 10 or above.</p>
+<h2 id="using-tree">Using Tree</h2>
+<p>The method that I took was using tree.</p>
+<ol>
+<li>Set origin as blank board.</li>
+<li>Add possible choices as children.</li>
+<li>Add possible choices as children for children.</li>
+<li>&hellip;(repeat until reaching the last row)&hellip;</li>
+<li>Return boards which has piece count of <strong>n</strong>.</li>
+</ol>
+<p>In simple form, it can be expressed like this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">ChessTree</span> <span class="p">{</span>
+  <span class="nx">constructor</span> <span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">board</span> <span class="o">=</span> <span class="nx">board</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="nx">size</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pieceCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">board</span> <span class="o">=</span> <span class="nx">blankBoard</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">insert</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Add child board;
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="nx">addPossibles</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Search for possible choices.
+</span><span class="c1"></span>    <span class="c1">//Add possible choices as children.
+</span><span class="c1"></span>    <span class="c1">//pass callback to putPiece.
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="nx">putPiece</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Put piece on Board[x][y].
+</span><span class="c1"></span>    <span class="c1">//Mark impossible positions.
+</span><span class="c1"></span>    <span class="c1">//add 1 to this.pieceCount.
+</span><span class="c1"></span>    <span class="c1">//Grab solution board by callback.
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="nx">forEachTree</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Callback for each tree.
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="kr">static</span> <span class="nx">nPieceSolutionArr</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">let</span> <span class="nx">newTree</span> <span class="o">=</span> <span class="nx">ChessTree</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">grabSolution</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tree</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">pieceCount</span> <span class="o">===</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">tree</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">newTree</span><span class="p">.</span><span class="nx">forEachTee</span><span class="p">((</span><span class="nx">subTree</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">subTree</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+          <span class="nx">subTree</span><span class="p">.</span><span class="nx">addPossibles</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">grabSolution</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">static</span> <span class="nx">nPieceSolutionCount</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">solutions</span> <span class="o">=</span> <span class="nx">ChessTree</span><span class="p">.</span><span class="nx">nPieceSolutionArr</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">solutions</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+<span class="p">}</span>
+
+</code></pre></div><h1 id="seriously-important-lessons">Seriously important Lessons</h1>
+<p>I could percieve three things. <strong class="orange">Time complexity</strong>, <strong class="skyblue">Prediction</strong>, <strong class="plum">Conditions.</strong></p>
+<h2 id="time-complexity">Time-complexity</h2>
+<p>There are too many choices. That&rsquo;s the problem. Without any rule, it show O(N<sup>n</sup>) time-complexity.</p>
+<p>As I struggling to get all the possible solutions for N-Queens when N = 20, I got this insight about time-complexity.</p>
+<blockquote>
+<ul>
+<li>O(1): &ldquo;I know the answer already&rdquo;</li>
+<li>O(log(n)): &ldquo;I know super efficient way to get the answer&rdquo;</li>
+<li>O(n): &ldquo;I know the answer but I need to find where it is&rdquo;</li>
+<li>O(n<sup>2</sup> ~ n<sup>n</sup>): &ldquo;I don&rsquo;t know any rules for predicting the answer but know the way to deduct it&rdquo;</li>
+</ul>
+</blockquote>
+<hr>
+<p>When there is no rules for filtering obsolete choices, N-Queens becomes hard.</p>
+<p><strong>But as we add rules for filtering obsolete choices in hence, it becomes easier and performant.</strong></p>
+<p>Then what is rules? <em>It&rsquo;s a prediction tool which we could learn by observing something.</em></p>
+<hr>
+<p>And the most basic rule that we applied to N-Queens is that &ldquo;When there is any queen on the same row, column, major diagonal, or minor diagonal, it&rsquo;s not a solution.&rdquo;</p>
+<p>As we add the simple rule, time-complexity becomes O(n!) from O(n^n).</p>
+<p>If we can find some other rules which can filter obsolete solutions in earlier stage, the time-complexity will become much smaller.</p>
+<hr>
+<p>In extreme case, it will become O(1). What kind of extreme? When we already know the precise equations which can derive the solutions.</p>
+<p>At this point, we can define O(1) as &ldquo;knowing all&rdquo; state. What O(1) actually means is either of belows.</p>
+<blockquote>
+<ol>
+<li>Solutions are stored in somewhere, and I know the key for retrieving it.</li>
+<li>I know the perfect equation that can derive solutions.</li>
+</ol>
+</blockquote>
+<p>When the solutions are input-specific and inputs are unique, <strong class="orange">1</strong> should be our target. But when solutions are predictable, we should target <strong class="orange">2</strong>.</p>
+<h2 id="prediction">Prediction</h2>
+<p>Prediction is another name of <strong>&ldquo;I know the principles.&quot;</strong> In N-Queens problem, a simple prediction we can apply is &ldquo;When there is any row that has no possible position, it&rsquo;s not a solution.&rdquo;</p>
+<p>If we want to predict in earlier stage, we can ask ourselves <strong class="skyblue">&quot;How can we predict if this board would have any obsolte row.&ldquo;</strong></p>
+<p>And it&rsquo;s the question that we need to ask, if we want to make our solution more performant.</p>
+<h2 id="conditions">Conditions</h2>
+<p>Conditions naturally considered in process for making predictions. The basic condition that we can find in the N-Queens problem is that <strong class="plum"> Every row should have at least one queen.</strong></p>
+<p>This rule is applied in code by <em>1.seeking possible solutions row by row</em> and <em>2.throwing out boards with obsolete row.</em></p>
+<p>As a base work of prediction. We can ask ourselves, &ldquo;In what condition, a row becomes obsolete?&rdquo; And if we get the answer, we can cut obsolete tree in advance.</p>
+<p>After then we can ask ourselves for each conditions again, &ldquo;In what condition, this condition becomes true?&rdquo;</p>
+<p>This loop can goes on until we get the final equation which can deduct the solution with simple calculation.</p>
+<h2 id="so-what">So what?</h2>
+<p>The lessons that I learnt is this.</p>
+<blockquote>
+<ol>
+<li><strong class="plum">think about the conditions</strong>, if the solution is predictable.</li>
+<li><strong class="skyblue">Filter the obsolete</strong>, if there is any condition that can predict solution.</li>
+<li><strong class="orange">Target smaller time-complexity</strong>, by findng more conditions.</li>
+</ol>
+</blockquote>
+</article><section class="article labels"><a class="category" href=/categories/algorithm/>algorithm</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/puzzle/>puzzle</a><a class="tag" href=/tags/data-structure/>data-structure</a><a class="tag" href=/tags/tree/>tree</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/oop/inheritance-patterns/"><span class="li">&rarr;</span>Inheritance Patterns in JS</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

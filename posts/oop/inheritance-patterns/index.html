@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Inheritance Patterns in JS&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+<meta name="supported-color-schemes" content="light dark"><title>Inheritance Patterns in JS&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.0463b7141b237063ffb57ebf04d5d4539abf4436f5ad8cfc591c9181944fbeff356edf1b0eb06a3d46a265d0f1fefaae.css" integrity="sha384-BGO3FBsjcGP/tX6/BNXUU5q/RDb1rYz8WRyRgZRPvv81bt8bDrBqPUaiZdDx/vqu"><body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Inheritance Patterns in JS</h1><p class="article date">Mar 25, 2020</p></section><article class="article markdown-body"><h1 id="what-is-inheritance">What is Inheritance?</h1>
+<blockquote>
+<p>Inheritance makes it easy to reuse codes.</p>
+</blockquote>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Book</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">category</span> <span class="o">=</span> <span class="nx">category</span><span class="p">;</span>
 <span class="p">}</span>
@@ -299,7 +302,7 @@
 <h1><small>Use</small> <strong style="color:orange">ES6 Pattern</strong> <small>or</small> <strong style="color:skyblue">Pseudo-classical Pattern</strong></h1>
 <p>In my opinion, setting <code>__proto__</code> and <code>prototype.constructor</code> clearly is better than throwing out this keyword because you can easily look up parent class when you need. <strong>But</strong>, it would be better to know Object Pattern and Object+Functional Pattern for understanding other&rsquo;s codes.</p>
 </article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/inheritance/>inheritance</a><a class="tag" href=/tags/prototype/>prototype</a><a class="tag" href=/tags/oop/>OOP</a></section><div class="article share addthis_inline_share_toolbox"></div>
-        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/time-complexity/"><span class="li">&rarr;</span>Time Complexity</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/algorithms/n-queens/"><span class="li">&larr;</span>N-Queens</a></p><p><a class="link" href="/posts/data-structure/time-complexity/"><span class="li">&rarr;</span>Time Complexity</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 

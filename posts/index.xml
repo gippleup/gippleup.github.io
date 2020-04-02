@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Wed, 25 Mar 2020 15:51:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 02 Apr 2020 11:42:00 +0900</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>N-Queens</title>
+      <link>/posts/algorithms/n-queens/</link>
+      <pubDate>Thu, 02 Apr 2020 11:42:00 +0900</pubDate>
+      
+      <guid>/posts/algorithms/n-queens/</guid>
+      <description>The time-complexity for brute force approach to N-Queens is Nn.</description>
+      
+    </item>
     
     <item>
       <title>Inheritance Patterns in JS</title>
@@ -18,7 +28,7 @@
       <pubDate>Wed, 25 Mar 2020 15:51:00 +0900</pubDate>
       
       <guid>/posts/oop/inheritance-patterns/</guid>
-      <description>What is Inheritance?</description>
+      <description>What is Inheritance?  Inheritance makes it easy to reuse codes.</description>
       
     </item>
     
@@ -28,7 +38,8 @@
       <pubDate>Wed, 25 Mar 2020 13:15:00 +0900</pubDate>
       
       <guid>/posts/data-structure/time-complexity/</guid>
-      <description>Target O(1) time-complexity.</description>
+      <description>Target O(1) time-complexity.
+ Concept  In computer science, the time complexity is the computational complexity that describes the amount of time it takes to run an algorithm.</description>
       
     </item>
     
@@ -48,7 +59,7 @@
       <pubDate>Mon, 23 Mar 2020 14:12:00 +0900</pubDate>
       
       <guid>/posts/data-structure/tree/</guid>
-      <description>Hierarchy?</description>
+      <description>Hierarchy? combinations? That&amp;rsquo;s all tree!</description>
       
     </item>
     
@@ -98,7 +109,7 @@
       <pubDate>Thu, 19 Mar 2020 13:39:13 +0900</pubDate>
       
       <guid>/posts/oop/oop/</guid>
-      <description>What is OOP?</description>
+      <description>What is OOP? OOP makes it easier to manifest hiearchical structure.</description>
       
     </item>
     
@@ -118,7 +129,7 @@
       <pubDate>Sun, 15 Mar 2020 21:39:13 +0900</pubDate>
       
       <guid>/posts/my-first-post/</guid>
-      <description>It&amp;rsquo;s</description>
+      <description>It&amp;rsquo;s been a month since</description>
       
     </item>
     
