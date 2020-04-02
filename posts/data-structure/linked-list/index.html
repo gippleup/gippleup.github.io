@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data Structure: Linked List&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data Structure: Linked List</h1><p class="article date">Mar 22, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>For removing and adding an item, linked list is handy.</p>
+</blockquote>
+<h1 id="concept">Concept</h1>
+<div style="text-align:center;">
+    <img style="border-radius: 5px; display: block;" src="https://cdn.programiz.com/sites/tutorial2program/files/linked-list-concept.jpg">
+    <small style="display: block;">(img from <a href="https://www.programiz.com/java-programming/queue">programiz</a>)</small>
+</div>
+<p>Linked list nodes have pointer in its own. What it means simply, <code>node.next = nextNode.</code> That is, you can access to next node by using this code <code>node.next.</code> Items are added to tail node.</p>
+<p>Belows are common methods included in linked list.</p>
+<blockquote>
+    <ol>
+        <li><strong style="color: orange">Add To Tail</strong>: Adds an item to the list – Time Complexity : O(1)
+        <li><strong style="color: orange">Remove Head</strong>: Removes an item in the head and return the value. If the queue is empty, then it is said to be an Underflow condition – Time Complexity : O(1)
+        <li><strong style="color: orange">Contains</strong>: Check if an item exist in the list – Time Complexity : O(n)
+    </ol>
+</blockquote>
+<br>
+# Linked List, written in JS
+<div style="overflow-y:scroll; height:500px; overflow-x:hidden">
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">LinkedList</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">tail</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToTail</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newEle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Node</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">newEle</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">tail</span> <span class="o">=</span> <span class="nx">newEle</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="nx">newEle</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">tail</span> <span class="o">=</span> <span class="nx">newEle</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">removeHead</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">node</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">result</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="k">return</span> <span class="s1">&#39;finish&#39;</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">curNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">head</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">&amp;&amp;</span> <span class="nx">result</span> <span class="o">!==</span> <span class="s1">&#39;finish&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">callback</span><span class="p">(</span><span class="nx">curNode</span><span class="p">,</span> <span class="nx">depth</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="c1">// result = callback(curNode, depth);
+</span><span class="c1"></span>        <span class="nx">curNode</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+        <span class="nx">depth</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">filter</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newList</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">node</span><span class="p">,</span> <span class="nx">depth</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">callback</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">depth</span><span class="p">,</span> <span class="k">this</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">newList</span><span class="p">.</span><span class="nx">addToTail</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">LinkedList</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newList</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">node</span><span class="p">,</span> <span class="nx">depth</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">depth</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">newList</span><span class="p">.</span><span class="nx">addToTail</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">Node</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<br>
+<h1 id="advantage-of-linked-list">Advantage of Linked List</h1>
+<p><mark>It&rsquo;s easy to insert an item, and easy to access to next item.</mark> This can be useful when you have a task which requires you to do tasks in order.</p>
+<h1 id="disadvantage-of-linked-list">Disadvantage of Linked List</h1>
+<p><mark>It&rsquo;s hard to modify items.</mark> Items are not marked with keys or name, which means you cannot access to specific item in single step. It forces you to search for all nodes if you want to retrieve an item.</p>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/linked-list/>linked-list</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/hash-table/"><span class="li">&larr;</span>Data Structure: Hash Table</a></p><p><a class="link" href="/posts/data-structure/queue-stack/"><span class="li">&rarr;</span>Data Structure: Queue n Stack</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

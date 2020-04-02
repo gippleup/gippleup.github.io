@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Time Complexity&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Time Complexity</h1><p class="article date">Mar 25, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>Target O(1) time-complexity.</p>
+</blockquote>
+<h1 id="concept">Concept</h1>
+<blockquote>
+<p>In computer science, the time complexity is the computational complexity that describes the amount of time it takes to run an algorithm.</p>
+— from [Wikipedia](https://en.
+wikipedia.org/wiki/Time_complexity)</p>
+</blockquote>
+<p>When reasoning execution time, we need to choose elementary operation which will play as an unit. Then, we can reason time-complexity.</p>
+<br>
+<h3 id="simple-example">Simple Example</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">findMax</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">ele</span> <span class="k">of</span> <span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">ele</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">max</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">max</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>In above code, let&rsquo;s say we picked <code>(ele &gt; max)</code> as elementary calculation. Then, the time-complexity of this example is O(n) because it would require calcuations as many as the length of array.</p>
+<p>Then, how can we define elementary operation? Can we choose above function as an elementary operation? Let&rsquo;s see how others think.</p>
+<br>
+<h3 id="define-elementary-operation">Define Elementary Operation</h3>
+<blockquote>
+<p>In general, an elementary operation must have two properties:</p>
+<ul>
+<li>There can’t be any other operations that are performed more frequently as the size of the input grows.</li>
+<li>The time to execute an elementary operation must be constant: it mustn’t increase as the size of the input grows. This is known as <a href="https://yourbasic.org/algorithms/unit-cost-vs-bit-cost/"target="_blank">unit cost</a>
+— from <cite><a href="https://yourbasic.org/algorithms/time-complexity-explained/"target="_blank">yourbasic</a></cite></li>
+</ul>
+</blockquote>
+<p>The elementary operation should be performed <mark>most frequently</mark>, and the time to execute it should remain <mark>constant.</mark></p>
+<p>Thus, the function we declared(<code>findMax</code>) should not be declared as elementary operation because the time it takes differs from array to array.</p>
+<br>
+<h3 id="why-should-i-know-this">&ldquo;Why should I know this?&rdquo;</h3>
+<p>If the size of data is small, time-complexity would not be required to be considered. However, when the size of data become huge it becomes important, especially the worst case time-complexity because it can severely harm performance.</p>
+<p>For example, if the size of number array is 10,000 and numbers are randomly indexed, how much time would it take if we want to sort it in ascending order?</p>
+<p>If we pick Bubble Sort a solution, the worst time-complexity would be O(n^2), while if we choose <a href="https://en.wikipedia.org/wiki/Counting_sort"target="_blank">Counting Sort</a>, the worst time-complexity would be O(n+k). Let&rsquo;s experiment for various sorting method and see how much important the time-complexity is.</p>
+<p>First, let&rsquo;s make random number array generator</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">randomNumArr</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">size</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">max</span><span class="o">-</span><span class="nx">min</span><span class="p">))</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div><h6>Bubble Sort</h6>
+<p>In this code, Bubble Sort compares every elements in the array and swap element position if element on right side is smaller than element of left side. <mark>The worst time-complexity for bubble sort is O(n^2) because it requires comparing n times for each loop.</mark>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">bubbleSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="nx">foundUnsorted</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">curValue</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="kd">let</span> <span class="nx">nextValue</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">curValue</span> <span class="o">&gt;</span> <span class="nx">nextValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">nextValue</span><span class="p">;</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">curValue</span><span class="p">;</span>
+        <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">numArr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h6 id="counting-sort">Counting Sort</h6>
+<p>In this code, elements are sorted by counting each element and reconstructing array from the counting information. <mark>Counting Sort shows <a href="https://stackoverflow.com/questions/27301287/what-is-the-difference-between-onk-and-onk-in-time-complexity"target="_blank">O(n+k)</a> time complexity in worst case.</mark></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">countingSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">min</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">numArr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ele</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="p">[</span><span class="nx">ele</span><span class="p">]</span> <span class="o">++</span><span class="p">;</span>
+  <span class="p">})</span>
+
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">min</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">--</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h6 id="insertion-sort">Insertion Sort</h6>
+<p>In this code, elements are sorted by comparing through nearest previous element to first element in the array. When previous element is larger than comparing element, comparing element are swapped to previous element. Insertion sort is a bit better than bubble sort, but it also shows <mark>O(n^2) time-complexity.</mark></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">insertionSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+            <span class="nx">j</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">numArr</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><h6 id="radix-sort">Radix Sort</h6>
+<p>In this code, elements are sorted by categorizing and reconstructing. First, elements are categorized by radix (when bucket size is 10 and max number is 43151, radix would be 10, 100, 1000, 10000 - if bucket size is 20, radix would be 20, 400, 8000, 160000). Second, merge elements after categorization and repeat until performed for all radix. <mark>Radix Sort shows O(kn) time-complexity in worsk case.</mark></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">radixSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">bucketSize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">maxNum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">arr</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">divisor</span> <span class="o">=</span> <span class="nx">bucketSize</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">divisor</span> <span class="o">&lt;</span> <span class="nx">maxNum</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">buckets</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">bucketSize</span><span class="p">)].</span><span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">[]);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">num</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">buckets</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">num</span> <span class="o">%</span> <span class="nx">divisor</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nx">divisor</span> <span class="o">/</span> <span class="nx">bucketSize</span><span class="p">))].</span><span class="nx">push</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">arr</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">.</span><span class="nx">apply</span><span class="p">([],</span> <span class="nx">buckets</span><span class="p">);</span>
+    <span class="nx">divisor</span> <span class="o">*=</span> <span class="nx">bucketSize</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><br>
+<h3 id="use-this-code-if-you-want-to-test">Use this code if you want to test</h3>
+<div style="height:200px; overflow-y:scroll">
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">randomNumArr</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">size</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">max</span><span class="o">-</span><span class="nx">min</span><span class="p">))</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">bubbleSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="nx">foundUnsorted</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">curValue</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="kd">let</span> <span class="nx">nextValue</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">curValue</span> <span class="o">&gt;</span> <span class="nx">nextValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">nextValue</span><span class="p">;</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">curValue</span><span class="p">;</span>
+        <span class="nx">foundUnsorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">numArr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">countingSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">min</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">numArr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ele</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="p">[</span><span class="nx">ele</span><span class="p">]</span> <span class="o">++</span><span class="p">;</span>
+  <span class="p">})</span>
+
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">min</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="nx">count</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">--</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">insertionSort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numArr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+            <span class="nx">j</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">numArr</span><span class="p">[</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">numArr</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">radixSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">bucketSize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">maxNum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">arr</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">divisor</span> <span class="o">=</span> <span class="nx">bucketSize</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">divisor</span> <span class="o">&lt;</span> <span class="nx">maxNum</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">buckets</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">bucketSize</span><span class="p">)].</span><span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">[]);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">num</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">buckets</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">num</span> <span class="o">%</span> <span class="nx">divisor</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nx">divisor</span> <span class="o">/</span> <span class="nx">bucketSize</span><span class="p">))].</span><span class="nx">push</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">arr</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">concat</span><span class="p">.</span><span class="nx">apply</span><span class="p">([],</span> <span class="nx">buckets</span><span class="p">);</span>
+    <span class="nx">divisor</span> <span class="o">*=</span> <span class="nx">bucketSize</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">sorts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">radix</span><span class="o">:</span> <span class="nx">radixSort</span><span class="p">,</span>
+    <span class="nx">count</span><span class="o">:</span> <span class="nx">countingSort</span><span class="p">,</span>
+    <span class="nx">bubble</span><span class="o">:</span> <span class="nx">bubbleSort</span><span class="p">,</span>
+    <span class="nx">insertion</span><span class="o">:</span> <span class="nx">insertionSort</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1">// let randomArr = randomNumArr(1000, 324, 14431)
+</span><span class="c1">// console.log(randomArr);
+</span><span class="c1">// console.log(sorts.radix(randomArr, 324, 14431));
+</span></code></pre></div></div>
+<br>
+<h1 id="things-to-remember">Things to remember</h1>
+<ol>
+<li>To calcualte time-complexity, defining elementary calculation should be done first.</li>
+<li>Consider time-complexity for each <a href="https://www.bigocheatsheet.com/"target="_blank">data structure</a>.</li>
+</ol>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/time-complexity/>time-complexity</a><a class="tag" href=/tags/data-structure/>data-structure</a><a class="tag" href=/tags/sorting/>sorting</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/oop/inheritance-patterns/"><span class="li">&larr;</span>Inheritance Patterns in JS</a></p><p><a class="link" href="/posts/data-structure/binary-search-tree/"><span class="li">&rarr;</span>Data Structure: Binary Search Tree(BST)</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

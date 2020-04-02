@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>concepts on Notepadium</title>
+    <link>/categories/concepts/</link>
+    <description>Recent content in concepts on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Wed, 25 Mar 2020 15:51:00 +0900</lastBuildDate>
+    
+        <atom:link href="/categories/concepts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Inheritance Patterns in JS</title>
+      <link>/posts/oop/inheritance-patterns/</link>
+      <pubDate>Wed, 25 Mar 2020 15:51:00 +0900</pubDate>
+      
+      <guid>/posts/oop/inheritance-patterns/</guid>
+      <description>What is Inheritance?</description>
+      
+    </item>
+    
+    <item>
+      <title>Time Complexity</title>
+      <link>/posts/data-structure/time-complexity/</link>
+      <pubDate>Wed, 25 Mar 2020 13:15:00 +0900</pubDate>
+      
+      <guid>/posts/data-structure/time-complexity/</guid>
+      <description>Target O(1) time-complexity.</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Binary Search Tree(BST)</title>
+      <link>/posts/data-structure/binary-search-tree/</link>
+      <pubDate>Mon, 23 Mar 2020 14:45:00 +0900</pubDate>
+      
+      <guid>/posts/data-structure/binary-search-tree/</guid>
+      <description>Binary Search is stable and fast.</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Tree</title>
+      <link>/posts/data-structure/tree/</link>
+      <pubDate>Mon, 23 Mar 2020 14:12:00 +0900</pubDate>
+      
+      <guid>/posts/data-structure/tree/</guid>
+      <description>Hierarchy?</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Graph</title>
+      <link>/posts/data-structure/graph/</link>
+      <pubDate>Mon, 23 Mar 2020 13:00:00 +0900</pubDate>
+      
+      <guid>/posts/data-structure/graph/</guid>
+      <description>Graph is deeply related to real-life problems.</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Hash Table</title>
+      <link>/posts/data-structure/hash-table/</link>
+      <pubDate>Sun, 22 Mar 2020 22:30:13 +0900</pubDate>
+      
+      <guid>/posts/data-structure/hash-table/</guid>
+      <description>For complex lookup, Hash Table is the king.</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Linked List</title>
+      <link>/posts/data-structure/linked-list/</link>
+      <pubDate>Sun, 22 Mar 2020 22:00:13 +0900</pubDate>
+      
+      <guid>/posts/data-structure/linked-list/</guid>
+      <description>For removing and adding an item, linked list is handy.</description>
+      
+    </item>
+    
+    <item>
+      <title>Data Structure: Queue n Stack</title>
+      <link>/posts/data-structure/queue-stack/</link>
+      <pubDate>Thu, 19 Mar 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/posts/data-structure/queue-stack/</guid>
+      <description>For managing task, queue n stack is useful.</description>
+      
+    </item>
+    
+    <item>
+      <title>Object Oriented Programming</title>
+      <link>/posts/oop/oop/</link>
+      <pubDate>Thu, 19 Mar 2020 13:39:13 +0900</pubDate>
+      
+      <guid>/posts/oop/oop/</guid>
+      <description>What is OOP?</description>
+      
+    </item>
+    
+    <item>
+      <title>Understanding Memoize</title>
+      <link>/posts/memoize/</link>
+      <pubDate>Mon, 16 Mar 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/posts/memoize/</guid>
+      <description>Memoize for reducing time-complexity.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

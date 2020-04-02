@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>prototype on Notepadium</title>
+    <link>/tags/prototype/</link>
+    <description>Recent content in prototype on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Wed, 25 Mar 2020 15:51:00 +0900</lastBuildDate>
+    
+        <atom:link href="/tags/prototype/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Inheritance Patterns in JS</title>
+      <link>/posts/oop/inheritance-patterns/</link>
+      <pubDate>Wed, 25 Mar 2020 15:51:00 +0900</pubDate>
+      
+      <guid>/posts/oop/inheritance-patterns/</guid>
+      <description>What is Inheritance?</description>
+      
+    </item>
+    
+  </channel>
+</rss>

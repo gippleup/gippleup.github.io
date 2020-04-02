@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Inheritance Patterns in JS&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Inheritance Patterns in JS</h1><p class="article date">Mar 25, 2020</p></section><article class="article markdown-body"><h1 id="what-is-inheritance">What is Inheritance?</h1>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Book</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">category</span> <span class="o">=</span> <span class="nx">category</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">Novel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">genre</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Book</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;novel&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">genre</span> <span class="o">=</span> <span class="nx">genre</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">Novel</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">Book</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+
+<span class="nx">Novel</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">genreInfo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The book&#39;s genre is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">genre</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">Book</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">categoryInfo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The book&#39;s category is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myNovel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Novel</span> <span class="p">(</span><span class="s1">&#39;thriller&#39;</span><span class="p">);</span>
+
+<span class="nx">myNovel</span><span class="p">.</span><span class="nx">genreInfo</span><span class="p">()</span> <span class="c1">//The book&#39;s genre is thriller
+</span><span class="c1"></span><span class="nx">myNovel</span><span class="p">.</span><span class="nx">categoryInfo</span><span class="p">()</span> <span class="c1">//The book&#39;s category is nove
+</span></code></pre></div><p><mark>Inheriting properties from another class or classes to create a class.</mark> Above codes shows inheriatnce from Book class to Novel class. Novel class has inherited &lsquo;category&rsquo; property and &lsquo;categoryInfo&rsquo; method from Book class.</p>
+<h1 id="why-does-it-matter">Why does it matter?</h1>
+<p>Object oriented programming is about constructing reality by using objects. <strong style="color:orange">Object inheritance make things more structured.</strong> Let&rsquo;s say we have class a &lsquo;thing&rsquo; and it has all properties that required to build everything in the universe. Then it should own almost infinite numbers of properties. If it does so, it would be grotesque to input all the parameters&hellip;</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Thing</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span>
+    <span class="nx">mass</span><span class="p">,</span> <span class="nx">component</span><span class="p">,</span> <span class="nx">volume</span><span class="p">,</span>
+    <span class="nx">hasLife</span><span class="p">,</span> <span class="nx">isPlanet</span><span class="p">,</span> <span class="nx">isWater</span><span class="p">,</span>
+    <span class="nx">isHuman</span><span class="p">,</span> <span class="nx">habit</span><span class="p">,</span> <span class="nx">hobby</span><span class="p">,</span>
+    <span class="nx">flavour</span><span class="p">,</span> <span class="nx">smell</span><span class="p">,</span> <span class="nx">hasAuditory</span><span class="p">,</span>
+    <span class="nx">hasVisual</span><span class="p">,</span> <span class="nx">hasBrain</span><span class="p">,</span> <span class="p">...</span>
+    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">John</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Thing</span><span class="p">(</span>
+    <span class="mi">156</span><span class="p">,</span> <span class="p">[</span><span class="nx">Oxygen</span><span class="p">,</span> <span class="nx">Carbon</span><span class="p">,</span> <span class="nx">Hydrogen</span><span class="p">,</span> <span class="nx">Nitrogen</span><span class="p">,</span> <span class="p">...],</span>
+     <span class="p">...</span>
+    <span class="p">)</span>
+</code></pre></div><p>At this point, we need inheritance.</p>
+<p>With inheritance, inputing parameters when declaring a thing with &lsquo;thing&rsquo; class can be more simple. Like This.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Thing</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="s1">&#39;few param&#39;</span><span class="p">)</span> <span class="p">{}</span>
+<span class="kr">const</span> <span class="nx">LivingThing</span>  <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="s1">&#39;few param&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...Inherit Thing
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kr">const</span> <span class="nx">Animal</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="s1">&#39;few param&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...Inherit LivingThing
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kr">const</span> <span class="nx">Vertebrate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="s1">&#39;few param&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...Inherit Animal
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kr">const</span> <span class="nx">Human</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="s1">&#39;few param&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...Inherit Vertebrate
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><p>With inheritance we can set some parameters of parent class as default value that we want and don&rsquo;t have to invent similar method again. (If you don&rsquo;t to inherit some properties of parent class, you can delete them from prototype just like deleting a property in an object.)</p>
+<p>In short, inheritance is about inputting parameters automatically and importing wanted methods from parent class. With proper inheritance, it becomes <strong style="color:orange">easier to understand written codes and build new instance.</strong></p>
+<h1 id="inheritance-patterns">Inheritance Patterns</h1>
+<p>Two things to bear in mind is these. When an object is created using <code>Object.create(proto)</code>, the prototype of the object is set to <code>proto</code>. Object.create(proto) is different from Object.assign(object, proto) in that Object.assign(object, proto) doesn&rsquo;t set prototype.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Drink</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">drink</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">Drink</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">drink</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Drink</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">info</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;This is a drink&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myDrink</span> <span class="o">=</span> <span class="nx">Drink</span><span class="p">(</span><span class="s1">&#39;water&#39;</span><span class="p">)</span>
+<span class="nx">myDrink</span><span class="p">.</span><span class="nx">info</span><span class="p">();</span> <span class="c1">//&#39;This is a drink&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Drink</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">myDrink</span><span class="p">))</span> <span class="c1">//false
+</span><span class="c1"></span>
+<span class="c1">//Though the method in side Drink.prototype is assigned,
+</span><span class="c1">//it doesn&#39;t mean that the prototype of myDrink is Drink.
+</span></code></pre></div><p>As said right before, Object.assign(object, proto) can&rsquo;t set prototype. Then how can we inherit from other classes? There are two methods. One is using Object.setPrototypeOf(obj, proto), and the other is usidng ES6 Class Syntax(extends).</p>
+<blockquote>
+<ol>
+<li><code>let obj = Object.create(proto)</code> sets prototype of obj as proto.
+<li><code>Object.setPrototypeOf(obj, proto)</code> sets internal prototype of obj as proto.
+</ol>
+</blockquote>
+<ul>
+<li>PseudoClassical Pattern; using <code>this, Function.call(), Object.setPrototypeOf(), new;</code>
+<li>ES6 Class Pattern; using <code>extends, super</code>
+<li>Object Pattern; using <code>Object, Object.create(), Object.setPrototypeOf()</code>
+<li>Functional + Object Pattern; using <code>Function, Object.create(), Object.setPrototypeOf()</code>
+</ul>
+<h3 id="pseudoclassical-pattern">PseudoClassical Pattern</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Drink</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Drink</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">drinkInfo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The type of this drink is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">Soda</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Drink</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;soda&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">Soda</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">Drink</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">//Or
+</span><span class="c1">//Soda.prototype = Object.create(Drink.prototype);
+</span><span class="c1">//Soda.prototype.constructor = Soda;
+</span><span class="c1"></span>
+<span class="nx">Soda</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sodaInfo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The type of this soda is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The name of this soda is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">mySoda</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Soda</span><span class="p">(</span><span class="s1">&#39;sprite&#39;</span><span class="p">,</span> <span class="s1">&#39;cider&#39;</span><span class="p">);</span>
+<span class="nx">mySoda</span><span class="p">.</span><span class="nx">drinkInfo</span><span class="p">()</span>
+<span class="c1">//The type of this drink is cider.
+</span><span class="c1"></span><span class="nx">mySoda</span><span class="p">.</span><span class="nx">sodaInfo</span><span class="p">()</span>
+<span class="c1">//The type of this soda is cider.
+</span><span class="c1">//The name of this soda is sprite.
+</span></code></pre></div><h3 id="es6-class-pattern">ES6 Class Pattern</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">species</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">species</span> <span class="o">=</span> <span class="nx">species</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">info</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The species of this creature is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">species</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Dog</span> <span class="kr">extends</span> <span class="nx">Animal</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">breed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">breed</span> <span class="o">=</span> <span class="nx">breed</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">info</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">.</span><span class="nx">info</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The name of this dog is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> and the breed is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">breed</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Human</span> <span class="kr">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">sex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="s1">&#39;human&#39;</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="nx">sex</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">info</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">.</span><span class="nx">info</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The name of this human is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> and sex is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">sex</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kr">static</span> <span class="nx">kiss</span> <span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">isHuman1</span> <span class="o">=</span> <span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">isHuman2</span> <span class="o">=</span> <span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isHuman1</span> <span class="o">&amp;&amp;</span> <span class="nx">isHuman2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Human who has name </span><span class="si">${</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> has french kissed with another huuman whose name is </span><span class="si">${</span><span class="nx">obj2</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">humanName</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">ele</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">ele</span><span class="p">))</span> <span class="p">{</span><span class="nx">acc</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">}</span> <span class="k">return</span> <span class="nx">acc</span><span class="p">},</span> <span class="p">{}).</span><span class="nx">name</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">humanName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Hey </span><span class="si">${</span><span class="nx">humanName</span><span class="si">}</span><span class="sb">! french kissing between different species are inhibited by federal law!`</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`There is no human`</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">walk</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Human </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> started to walk.`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">let</span> <span class="nx">john</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">marry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">(</span><span class="s1">&#39;marry&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">spark</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span> <span class="s1">&#39;poodle&#39;</span><span class="p">);</span>
+
+<span class="nx">john</span><span class="p">.</span><span class="nx">info</span>
+<span class="c1">//The species of this creature is human
+</span><span class="c1">//The name of this human is john and sex is male
+</span><span class="c1"></span><span class="nx">marry</span><span class="p">.</span><span class="nx">info</span>
+<span class="c1">//The species of this creature is human
+</span><span class="c1">//The name of this human is marry and sex is female
+</span><span class="c1"></span><span class="nx">spark</span><span class="p">.</span><span class="nx">info</span>
+<span class="c1">//The species of this creature is dog
+</span><span class="c1">//The name of this dog is spark and the breed is poodle
+</span><span class="c1"></span><span class="nx">Human</span><span class="p">.</span><span class="nx">kiss</span><span class="p">(</span><span class="nx">john</span><span class="p">,</span> <span class="nx">marry</span><span class="p">);</span>
+<span class="c1">//Human who has name john has french kissed with another huuman whose name is marry.
+</span><span class="c1"></span><span class="nx">Human</span><span class="p">.</span><span class="nx">kiss</span><span class="p">(</span><span class="nx">john</span><span class="p">,</span> <span class="nx">spark</span><span class="p">);</span>
+<span class="c1">//Hey john! french kissing between different species are inhibited by federal law!
+</span><span class="c1"></span><span class="nx">Human</span><span class="p">.</span><span class="nx">kiss</span><span class="p">(</span><span class="nx">marry</span><span class="p">,</span> <span class="nx">spark</span><span class="p">);</span>
+<span class="c1">//Hey marry! french kissing between different species are inhibited by federal law!
+</span></code></pre></div><h3 id="object-pattern">Object Pattern</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Planet</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">create</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">planet</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Planet</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+    <span class="nx">planet</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">planet</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">prototype</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">spin</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The type of this planet is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`A planet is spinning. Bing Bing.`</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">SolarPlanet</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">solarPlanet</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">SolarPlanet</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">solarPlanet</span><span class="p">,</span> <span class="nx">Planet</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;solar planet&#39;</span><span class="p">));</span>
+    <span class="nx">solarPlanet</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">solarPlanet</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">prototype</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">info</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The name of this planet is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">.`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">SolarPlanet</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">Planet</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">//Or
+</span><span class="c1">//SolarPlanet.prototype = Object.create(Planet.prototype);
+</span><span class="c1">//SolarPlanet.prototype.constructor = SolarPlanet;
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">mySolarPlanet</span> <span class="o">=</span> <span class="nx">SolarPlanet</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;earth&#39;</span><span class="p">);</span>
+<span class="nx">mySolarPlanet</span><span class="p">.</span><span class="nx">spin</span><span class="p">();</span>
+<span class="nx">mySolarPlanet</span><span class="p">.</span><span class="nx">info</span><span class="p">();</span>
+</code></pre></div><h3 id="functional--object-pattern">Functional + Object Pattern</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Exercise</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">exercise</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Exercise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+  <span class="nx">exercise</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">exercise</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Exercise</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">exerciseInfo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The type of this exercise is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">Cardio</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">calorie</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">cardio</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Cardio</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">cardio</span><span class="p">,</span> <span class="nx">Exercise</span><span class="p">(</span><span class="s1">&#39;cardio&#39;</span><span class="p">))</span>
+  <span class="nx">cardio</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="nx">cardio</span><span class="p">.</span><span class="nx">calorie</span> <span class="o">=</span> <span class="nx">calorie</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">cardio</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Cardio</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">cardioInfo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The name of this exercise is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The average calories consumed is </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">calorie</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">Cardio</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">Exercise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">//Or
+</span><span class="c1">//Soda.prototype = Object.create(Drink.prototype);
+</span><span class="c1">//Soda.prototype.constructor = Soda;
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">myCardio</span> <span class="o">=</span> <span class="nx">Cardio</span><span class="p">(</span><span class="s1">&#39;swimming&#39;</span><span class="p">,</span> <span class="mi">413</span><span class="p">);</span>
+<span class="nx">myCardio</span><span class="p">.</span><span class="nx">exerciseInfo</span><span class="p">()</span>
+<span class="nx">myCardio</span><span class="p">.</span><span class="nx">cardioInfo</span><span class="p">()</span>
+</code></pre></div><h1 id="evaluation">Evaluation</h1>
+<h6 id="1-pseudocalssical-pattern">1. Pseudocalssical Pattern</h6>
+<p>The drawback of Pseudocalssical Pattern is that it requires using &lsquo;this&rsquo; keyword which sometimes can make things seem more complex than it is. However, javascript system Objects follow pseudoclassical patterns. That is, being accustomed to this pattern is necessary.</p>
+<p>This method has an advantage in that we can seperate each methods or prototype property by using <code>Class.prototype.methodName = () {}</code>.</p>
+<h6 id="2-es6-class-pattern">2. ES6 Class Pattern</h6>
+<p>With class-constructor pattern, methods and constructing parts of class should be set inside class declaration. This can help arranging code. Another advantage followed by using ES6 pattern is that we don&rsquo;t have to use <code>ParentClass.call(parm1, parm2, parm3)</code> for inheriting properties and method. We can simply use <code>super(parm1, parm2, parm3)</code>, and super is handy because you can access to parent class by using somethig like <code>super.methodName</code> or <code>super.propertyName</code>.</p>
+<h6 id="3-object-pattern">3. Object Pattern</h6>
+<p>If you don&rsquo;t want to use &lsquo;this&rsquo; keyword, you can use Object Pattern. Drawback of this method is that you can&rsquo;t access to parent classes through <strong>proto</strong>.</p>
+<p>If you use Object Pattern example from above, you would see below log when you console.log(youObjectName). What you can see is, the <strong>proto</strong> is not set as parent class. This is not good because you cannot explicitly see what the parent class of you instnace.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">mySolarPlanet</span>
+<span class="p">=&gt;</span>  <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;solar planet&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;earth&#34;</span><span class="p">}</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;solar planet&#34;</span>
+      <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;earth&#34;</span>
+      <span class="nx">__proto__</span><span class="o">:</span>
+      <span class="nx">info</span><span class="o">:</span> <span class="nx">ƒ</span> <span class="nx">info</span><span class="p">()</span>
+      <span class="nx">__proto__</span><span class="o">:</span>
+      <span class="nx">spin</span><span class="o">:</span> <span class="nx">ƒ</span> <span class="nx">spin</span><span class="p">()</span>
+      <span class="nx">__proto__</span><span class="o">:</span> <span class="nb">Object</span>
+
+</code></pre></div><p>The advantage of this pattern is that you don&rsquo;t have to use <code>this</code>. But, with my opinion, Using ES6 of Pseudofunctional Pattern is better because you can see What is the parent class of the instance. Think about a situation where you have 20,000 lines of codes and don&rsquo;t know the parent class of your target instance.</p>
+<h6 id="4-object--functional-pattern">4. Object + Functional Pattern</h6>
+<p>This pattern is similar to 3rd pattern. But it requires using this keywords.</p>
+<h1><small>Use</small> <strong style="color:orange">ES6 Pattern</strong> <small>or</small> <strong style="color:skyblue">Pseudo-classical Pattern</strong></h1>
+<p>In my opinion, setting <code>__proto__</code> and <code>prototype.constructor</code> clearly is better than throwing out this keyword because you can easily look up parent class when you need. <strong>But</strong>, it would be better to know Object Pattern and Object+Functional Pattern for understanding other&rsquo;s codes.</p>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/inheritance/>inheritance</a><a class="tag" href=/tags/prototype/>prototype</a><a class="tag" href=/tags/oop/>OOP</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/time-complexity/"><span class="li">&rarr;</span>Time Complexity</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

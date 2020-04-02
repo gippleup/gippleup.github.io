@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data Structure: Queue n Stack&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data Structure: Queue n Stack</h1><p class="article date">Mar 19, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>For managing task, queue n stack is useful.</p>
+</blockquote>
+<h1 id="intro">Intro</h1>
+<p>Each data structures are opt for different tasks. This page illustrates each data structure&rsquo;s <mark>concept, advantage, and disadvantage.</mark></p>
+<h1 id="basic-data-structure">Basic Data Structure</h1>
+<p>Queue and Stack are maybe one of most simple data structure. <mark>Queue</mark> is used for FIFO(First In First Out - Imagine <mark>lining up for ice cream</mark>) and <mark>Stack</mark> is used for LIFO(Last In First Out - Imagine <mark>stacking dishes</mark>)</p>
+<h2 id="queue">Queue</h2>
+<div style="text-align:center;">
+    <img style="border-radius: 5px; display: block;" src="https://cdn.programiz.com/sites/tutorial2program/files/queue-implementation.png">
+    <small style="display: block;">(img from <a href="https://www.programiz.com/java-programming/queue">programiz</a>)</small>
+</div>
+<p>Belows are common methods included in queue.</p>
+<blockquote>
+    <ol>
+        <li><strong style="color: orange">Enqueue</strong>: Adds an item to the queue. If the queue is full, then it is said to be an Overflow condition – Time Complexity : O(1)
+        <li><strong style="color: orange">Dequeue</strong>: Removes an item from the queue. The items are popped in the same order in which they are pushed. If the queue is empty, then it is said to be an Underflow condition – Time Complexity : O(1)
+        <li><strong style="color: orange">Front</strong>: Get the front item from queue – Time Complexity : O(1)
+        <li><strong style="color: orange">Rear</strong>: Get the last item from queue – Time Complexity : O(1)
+    </ol>
+    <p>- From <a href="https://www.geeksforgeeks.org/queue-in-python/">GeeksForGeeks</a></p>
+</blockquote>
+<br>
+<h3 id="queue-written-in-js">Queue, written in JS</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Queue</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Queue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">enqueue</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">++</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Queue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">dequeue</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">delete</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">--</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Queue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Queue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">front</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="nx">Queue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">rear</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><br>
+<h3 id="advantage-of-queue">Advantage of Queue</h3>
+<p>When there is no need for modifying values in queue, queue can be useful. Basic queue methods are time-efficient. <em>enqueue, size, front, rear</em> methods show O(1), and dequeue shows O(n) time-efficiency. <mark>When a task should be performed in order and doesn&rsquo;t require much modification on data structure</mark>, you may consider using queue.</p>
+<h3 id="disadvantage-of-queue">Disadvantage of Queue</h3>
+<p><mark>It&rsquo;s not opt for modifying data</mark> in itself because a data is saved without an id or specific name. For modifying a data, you need to search for all data in itself(if the data you want to modify sits in index n, you need to compare values n times).</p>
+<h2 id="stack">Stack</h2>
+<div style="text-align: center">
+    <img style="width: 50%; border-radius: 5px;" src="https://cdn.programiz.com/sites/tutorial2program/files/stack-implementation.png">
+    <small style="display:block">(img from <a href="https://www.programiz.com/java-programming/queue">programiz</a>)</small>
+</div>
+<p>Belows are common methods included in stack.</p>
+<blockquote>
+    <ol>
+        <li><strong style="color: orange">push(Object element)</strong> : Pushes an element on the top of the stack.
+        <li><strong style="color: orange">pop()</strong> : Removes and returns the top element of the stack. An ‘EmptyStackException’ exception is thrown if we call pop() when the invoking stack is empty.
+        <li><strong style="color: orange">peek()</strong> : Returns the element on the top of the stack, but does not remove it.
+        <li><strong style="color: orange">empty()</strong> : It returns true if nothing is on the top of the stack. Else, returns false.
+        <li><strong style="color: orange">search(Object element)</strong> : It determines whether an object exists in the stack. If the element is found, it returns the position of the element from the top of the stack. Else, it returns -1.
+    </ol>
+    <p>- From <a href="https://www.geeksforgeeks.org/stack-class-in-java/">GeeksForGeeks</a></p>
+</blockquote>
+<h3 id="stack-written-in-js">Stack, written in JS</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Stack</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">push</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Stack</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">pop</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">delete</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">--</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Stack</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="advantage-n-disadvantage">Advantage n Disadvantage?</h3>
+<p>Well, it's very similar to queue. What differs stack from queue is that queue let out which came first, stack let out which came last.</p></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/queue/>queue</a><a class="tag" href=/tags/stack/>stack</a><a class="tag" href=/tags/data-structure/>data-structure</a><a class="tag" href=/tags/javascript/>javascript</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/linked-list/"><span class="li">&larr;</span>Data Structure: Linked List</a></p><p><a class="link" href="/posts/oop/oop/"><span class="li">&rarr;</span>Object Oriented Programming</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

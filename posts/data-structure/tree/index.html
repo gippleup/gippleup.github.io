@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data Structure: Tree&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data Structure: Tree</h1><p class="article date">Mar 23, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>Hierarchy? combinations? That&rsquo;s all tree!</p>
+</blockquote>
+<h1 id="concept">Concept</h1>
+<div style="text-align:center;">
+    <img style="background:white; border-radius:5px" src="https://cdn.programiz.com/sites/tutorial2program/files/tree.png">
+    <small style="display: block;">(img from <a href="https://www.programiz.com/dsa/hash-table">programiz</a>)</small>
+</div>
+<p>Tree data structure can boost access time.</p>
+<p>Let&rsquo;s say, we have 10,000 items in an array and we don&rsquo;t know where the target item is. When we want to access the item, the minimum time-complexity is O(n) because we need to compare every items in the array.</p>
+<p>However, if we can arrange the data in a tree structure, it can reduce access time exponentionally. For example, if every nodes can be structured with 10 children for each. The depth of tree will be 4 and each depth would require only 10 calculation, which would result in 40 or lower calculation even in worst case and 4 calculation in best case.</p>
+<blockquote>
+<p>In ideal setting, 10,000 calculation can be replaced with 4~40 calculation, with tree data structure.</p>
+</blockquote>
+<br>
+<h3 id="exmaple-of-tree-structure">Exmaple of tree structure</h3>
+<ul>
+<li><strong style="color:skyblue;">Taxonomy</strong>: Taxonomy usually follows hierarchical order, which implies it can be structured in tree form. See <a href="https://runestone.academy/runestone/books/published/pythonds/_images/biology.png"target="_blank">this</a></li>
+<li><strong style="color:skyblue;">File system</strong>: File systems can be illsurated with tree structure. See <a href="https://runestone.academy/runestone/books/published/pythonds/_images/directory.png"target="_blank">this</a></li>
+<li><strong style="color:skyblue;">Webpage structure</strong>: As above, an webpage structure can be also expressed in tree form. Like <a href="https://runestone.academy/runestone/books/published/pythonds/_images/htmltree.png"target="_blank">this</a></li>
+</ul>
+<br>
+<p>Belows are common methods included in hash table.</p>
+<blockquote>
+<p><strong style="color: orange">addChild</strong>: Add a child tree node to existing tree.
+<strong style="color: orange">contains</strong>: Check if an item exist in the tree.</p>
+</blockquote>
+<br>
+# Graph, written in JS
+<div style="overflow-y:scroll; height:500px; overflow-x:hidden">
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Tree</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">newTree</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">treeMethods</span><span class="p">);</span>
+  <span class="nx">newTree</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+
+  <span class="nx">newTree</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">return</span> <span class="nx">newTree</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">treeMethods</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">treeMethods</span><span class="p">.</span><span class="nx">addChild</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tree</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newNode</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">treeMethods</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">child</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">child</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">contains</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<br>
+<h1 id="advantages">Advantages</h1>
+<ul>
+<li>Trees can reflect structural relationships in the data.</li>
+<li>Trees provide an efficient insertion and searching because it allows us to access to item efficiently.</li>
+</ul>
+<h1 id="disadvantages">Disadvantages</h1>
+<ul>
+<li>It&rsquo;s not opt for non-structural data.</li>
+</ul>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/graph/>graph</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/binary-search-tree/"><span class="li">&larr;</span>Data Structure: Binary Search Tree(BST)</a></p><p><a class="link" href="/posts/data-structure/graph/"><span class="li">&rarr;</span>Data Structure: Graph</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Understanding Memoize&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Understanding Memoize</h1><p class="article date">Mar 16, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>Memoize for reducing time-complexity.</p>
+</blockquote>
+<h3 id="memoize-is-useful-for-repetitive-task">Memoize is useful for repetitive task.</h3>
+<p>Underscore memoize was very useful when a function should refer its previous value. For example, when calculating 100th fibonacci number, memoizing can be helpful. If we don&rsquo;t use it, it stucks around 40-50th value.</p>
+<br>
+<h4 id="mark1-basic-fibonacci-functionmark"><mark>1. Basic Fibonacci function:</mark></h4>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fibonacci</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">?</span> 
+      <span class="mi">1</span> <span class="o">:</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">fibonacci</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1">//console would crash.
+</span></code></pre></div><p>If fibonacci function is not cached, it&rsquo;s rarely possible to produce more than 50th fibonacci because it requires huge call stack at once. To help our pc to exert its full potential, we need cache.</p>
+<br>
+<h4 id="mark2-directly-cached-fibonacci-functionmarkh4"><mark>2. Directly cached Fibonacci function:</mark></h4></h4>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">cachedFibonacci</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">cache</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">function</span> <span class="nx">fiboOrigin</span> <span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">k</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">?</span> 
+              <span class="mi">1</span> <span class="o">:</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">k</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+            <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+            <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myFibo</span> <span class="o">=</span> <span class="nx">cachedFibonacci</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myFibo</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="c1">// 354224848179262000000
+</span></code></pre></div><p>To utilize cache, we need to declare another variable using our cached closure. After declaring variable, our varialbe is equipped with private variable(cache) which is declared in the closure. With this setup, we can calculate more than 1400th fibonacci.</p>
+<p>But, there is something that makes us scratches our head. If you closely look at the code above, there is parts that sharing same structure.</p>
+<h6 id="this-part">This part</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fiboOrigin</span> <span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">k</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">?</span> 
+            <span class="mi">1</span> <span class="o">:</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">k</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+        <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h6 id="and-this-part">And this part</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fiboOrigin</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+        <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</code></pre></div><p>If we use above structure, we have to declare cached origin function and another variable for each. This can be a problem if you want to add some functionality to cached functions for each because it would require editting for each origin function <mark>That&rsquo;s where memoize function shines its beauty.</mark></p>
+<br>
+Memoize function has cache and cacher declared in its self. Cacher automate caching for each functions. <mark>This enables us to handle multiple functions' cache with just one function.</mark> The mighty memoize.
+<h4 id="mark3-cached-using-memoize-functionmark"><mark>3. Cached using memoize function:</mark></h4>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">memoize</span> <span class="p">(</span><span class="nx">targetFunc</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">cache</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="kd">function</span> <span class="nx">cacher</span> <span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">cacher</span><span class="p">(</span><span class="nx">targetFunc</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="kd">let</span> <span class="nx">fib</span> <span class="o">=</span> <span class="nx">memoize</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">?</span> 
+    <span class="mi">1</span> <span class="o">:</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span> <span class="c1">//354224848179262000000
+</span></code></pre></div><p>In the above code, we declare our fibonacci function using memoize function. If you are encountering memoize for the first time, it would be confusing. What worked for me was thinking memoize as extended &lsquo;function&rsquo; tag which we can write our code inside it just like writing a function.</p>
+<h6 id="whats-going-on-inside-is">What&rsquo;s going on inside is:</h6>
+<small>
+<ol>
+  <li>Fibo function is delivered to memoize function.</li>
+  <li>Fibo function is delivered to cacher.</li>
+  <li>Cacher returns a function which is added caching functionality.</li>
+  <li>Now fibo function works based on cache.</li>
+</ol>
+</small>
+<p>With memoize function, we can add any function which has caching functionality. This is much better than adding cache for each original closures because it has only one junction when it comes to maintenance.</p>
+<p>But what if you want to remove cached data? What if you want to load cached data? Then we can modify our memoize function like below.</p>
+<p>Take your time, build your own memoize, then you will love it.</p>
+<h4 id="mark4-add-more-functionality-by-adding-propertymark-h4"><mark>4. add more functionality by adding property!</mark> </h4></h4>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">memoize</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">cache</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="kd">function</span> <span class="nx">cacher</span> <span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">funcName</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="nx">cache</span><span class="p">[</span><span class="nx">funcName</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">funcName</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">funcName</span><span class="p">][</span><span class="nx">key</span><span class="p">];</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="nx">cache</span><span class="p">[</span><span class="nx">funcName</span><span class="p">][</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">memo</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">targetFunc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">cacher</span><span class="p">(</span><span class="nx">targetFunc</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">read</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">targetFunc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">targetFunc</span><span class="p">.</span><span class="nx">name</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">memoizer</span> <span class="o">=</span> <span class="nx">memoize</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">myFibo</span> <span class="o">=</span> <span class="nx">memoizer</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">n</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="nx">myFibo</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">myFibo</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">})</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myFibo</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="c1">//354224848179262000000
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">memoizer</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">myFibo</span><span class="p">))</span> <span class="c1">// 0~100th fibo
+</span></code></pre></div></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/memoize/>memoize</a><a class="tag" href=/tags/javascript/>javascript</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/oop/oop/"><span class="li">&larr;</span>Object Oriented Programming</a></p><p><a class="link" href="/posts/my-first-post/"><span class="li">&rarr;</span>Start</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data Structure: Binary Search Tree(BST)&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data Structure: Binary Search Tree(BST)</h1><p class="article date">Mar 23, 2020</p></section><article class="article markdown-body"><blockquote>Binary Search is stable and fast.</blockquote>
+<h1 id="concept">Concept</h1>
+<div style="text-align:center;">
+    <img style="background:white; border-radius:5px" src="https://cdn.programiz.com/sites/tutorial2program/files/bst-vs-not-bst.jpg">
+    <small style="display: block;">(img from <a href="https://www.programiz.com/dsa/binary-search-tree">programiz</a>)</small>
+</div>
+<p>Binary search tree, as its name implies, does arrange an item automatically when we add it.</p>
+<p>If there are 10,000 items in an array, the minimum time-complexit will be O(n). However, if items can be arranged in binary search tree, the tree would have 13 as depth. And this will reduce the calculation count to 13 from 10,000.</p>
+<blockquote>
+<p>In ideal setting, 10,000 calculation can be replaced with 13 calculation, with binary search tree data structure.</p>
+</blockquote>
+<br>
+Belows are common methods included in binary search tree.
+<blockquote>
+    <ol>
+        <li><strong style="color: orange">addChild</strong>: Add a child tree node to existing tree.
+        <li><strong style="color: orange">contains</strong>: Check if an item exist in the tree.
+    </ol>
+</blockquote>
+<br>
+<h1 id="binary-search-tree-written-in-js">Binary Search Tree, written in JS</h1>
+<div style="overflow-y:scroll; height:500px; overflow-x:hidden">
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">BinarySearchTree</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">instance</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">insert</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">left</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">BinarySearchTree</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">right</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">BinarySearchTree</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">contains</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">left</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">right</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">instance</span><span class="p">.</span><span class="nx">depthFirstLog</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">cb</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">left</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">depthFirstLog</span><span class="p">(</span><span class="nx">cb</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">right</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">instance</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">depthFirstLog</span><span class="p">(</span><span class="nx">cb</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">instance</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<br>
+<h1 id="advantages">Advantages</h1>
+<ul>
+    <li>It can reduce search time exponentially, as like tree structure.
+    <li>The calculation time required is static(in other words, stable). For example, when 10,000 items are represented in tree structure which has 100 nodes for each subtree, it requires 4~40 calculation. Howevert, when the same items are represented in binary search tree, it would require 13 calculation at maximum.
+</ul></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/binary-search-tree/>binary-search-tree</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/time-complexity/"><span class="li">&larr;</span>Time Complexity</a></p><p><a class="link" href="/posts/data-structure/tree/"><span class="li">&rarr;</span>Data Structure: Tree</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

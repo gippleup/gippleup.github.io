@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data Structure: Hash Table&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data Structure: Hash Table</h1><p class="article date">Mar 22, 2020</p></section><article class="article markdown-body"><blockquote>
+<p>For complex lookup, Hash Table is the king.</p>
+</blockquote>
+<h1 id="concept">Concept</h1>
+<div style="text-align:center;">
+    <img style="background:white; border-radius:5px;" src="https://cdn.programiz.com/sites/tutorial2program/files/Hash-2_0.png">
+    <small style="display: block;">(img from <a href="https://www.programiz.com/dsa/hash-table">programiz</a>)</small>
+</div>
+<p>Hash table can be used for restricting array size or needed in a situation where array size is limited. Its node has two property, key and data.</p>
+<div style="text-align:center;">
+    <img src="https://cdn.programiz.com/sites/tutorial2program/files/Hash-0.png">
+</div>
+<p>Main components of hash table is hasing function and storage.</p>
+<ol>
+    <li><strong style="color:skyblue">Hashing Function</strong>: When a key name is given as an input, this function returns index which doesn't exceed given size.
+    <li><strong style="color:skyblue">Table (or Storage)</strong>: When an index is decided by hashing function, we store item to storage in that index.
+</ol>
+<h3 id="hashing-function">Hashing Function</h3>
+<p>A good hash function has the following characteristics.</p>
+<blockquote>
+<ul>
+<li>It should not generate keys that are too large and the bucket space is small. Space is wasted.</li>
+<li>The keys generated should be neither very close nor too far in range.</li>
+<li>The collision must be minimized as much as possible.</p>
+— from <cite><a href="https://www.programiz.com/dsa/hash-table"target="_blank">programiz</a></cite></li>
+</ul>
+</blockquote>
+</blockquote>
+<br>
+Belows are common methods included in hash table.</p>
+<blockquote>
+    <ol>
+        <li><strong style="color: orange">Insert</strong>: Adds an item to the table
+        <li><strong style="color: orange">Retrieve</strong>: Retrieve an item with given key.
+        <li><strong style="color: orange">Remove</strong>: 
+        Remove an item which has given key.
+    </ol>
+</blockquote>
+<br>
+<h1 id="hash-table-written-in-js">Hash Table, written in JS</h1>
+<h6 id="hash-table-class">Hash Table Class</h6>
+<div style="overflow-y:scroll; height:500px; overflow-x:hidden">
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">HashTable</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">limit</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkedList</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">HashTable</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">insert</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">addToTail</span><span class="p">(</span><span class="nx">newObj</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">));</span>
+<span class="p">};</span>
+
+<span class="nx">HashTable</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">retrieve</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">result</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+                <span class="k">return</span> <span class="s1">&#39;finish&#39;</span> <span class="c1">//This is for stopping loop. See line 43 of linkedList.js
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">HashTable</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">getIndexBelowMaxForKey</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">filter</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">newObj</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">result</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h6 id="hashing-function-1">Hashing Function</h6>
+<div>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">getIndexBelowMaxForKey</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">hash</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">hash</span> <span class="o">=</span> <span class="p">(</span><span class="nx">hash</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="nx">hash</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+        <span class="nx">hash</span> <span class="o">&amp;=</span> <span class="nx">hash</span><span class="p">;</span> <span class="c1">// Convert to 32bit integer
+</span><span class="c1"></span>        <span class="nx">hash</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">hash</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">hash</span> <span class="o">%</span> <span class="nx">max</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<br>
+<h1 id="advantage-of-hash-table">Advantage of Hash Table</h1>
+<p><mark>Fast lookup and insertion.</mark> With proper hashing, data lookup becomes easier. For example, when we have 10,000 datas to lookup, it can set up ranges for data, which would reduce work-load enormously.</p>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/hash-table/>hash-table</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/graph/"><span class="li">&larr;</span>Data Structure: Graph</a></p><p><a class="link" href="/posts/data-structure/linked-list/"><span class="li">&rarr;</span>Data Structure: Linked List</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Object Oriented Programming&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.f99b0e1f533a2af00de40e445ab5b7131d25ac2ad2e1dadbd671ecde23e2be6607036139d58fb71a192944627c85f914.css" integrity="sha384-&#43;ZsOH1M6KvAN5A5EWrW3Ex0lrCrS4drb1nHs3iPivmYHA2E51Y&#43;3GhkpRGJ8hfkU"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Object Oriented Programming</h1><p class="article date">Mar 19, 2020</p></section><article class="article markdown-body"><h1 id="what-is-abbr-titleobject-oriented-programmingoopabbr">What is <abbr title="Object Oriented Programming">OOP</abbr>?</h1>
+<p>OOP makes it easier to manifest hiearchical structure.</p>
+<p>OOP can be descibed with class and instance. Class creates instances and instance is a product of class.</p>
+<p>For real-life example, a tomato juice is a instance of juice, and juice is a class for tomato juice.</p>
+<h2 id="in-short-oop-is-about-structuring-things">In short, OOP is about structuring things.</h2>
+<p>Let&rsquo;s say we are building a webApp which provides all sorts of UI buttons.</p>
+<p>When building this, we would make many kinds of buttons - like popup button, submit button, animating button, etc.</p>
+<p>When the number of buttons are not big, there would be no problem even if we build each buttons with seperate functions.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">submitButton</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">onClick</span><span class="o">:</span> <span class="s1">&#39;do something&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="s1">&#39;10px&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">animatingButton</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">onClick</span><span class="o">:</span> <span class="s1">&#39;do something&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="s1">&#39;12px&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1">//...continues
+</span></code></pre></div><p>However, when the projet becomes bigger and more buttons are needed, declaring each buttons independently would be a problem.</p>
+<p>Let say, you have 100 buttons and users complain about something that is common for all the buttons.</p>
+<p>Without OOP, you would have to fix all the buttons one by one, which would requires your backbones to break.</p>
+<h4 id="oop-can-save-you">OOP can save you</h4>
+<p>Meanwhile, if you have built buttons based upon OOP, you would be able to fix the problem by fixing one function - the class function.</p>
+<p>There are many pages that explaining about OOP in detail. <a href="https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/"target="_blank">Like this</a></p>
+<h2 id="think-structure">Think structure</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Button</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="nx">size</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">AnimatedButton</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">animation</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Button</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">animation</span> <span class="o">=</span> <span class="nx">animation</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">duration</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimatedButton</span><span class="p">(</span><span class="s1">&#39;shrinkButton&#39;</span><span class="p">,</span> <span class="s1">&#39;animated&#39;</span><span class="p">,</span> <span class="s1">&#39;10px&#39;</span><span class="p">,</span> <span class="s1">&#39;shrink&#39;</span><span class="p">,</span> <span class="s1">&#39;1s&#39;</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myButton</span><span class="p">);</span>
+<span class="c1">//======================//
+</span><span class="c1">//     console said     //
+</span><span class="c1">//======================//
+</span><span class="c1">// AnimatedButton {     //
+</span><span class="c1">// name:&#34;shrinkButton&#34;, //
+</span><span class="c1">// type:&#34;animated&#34;,     //
+</span><span class="c1">// size:&#34;10px&#34;,         //
+</span><span class="c1">// animation:&#34;shrink&#34;,  //
+</span><span class="c1">// duration:&#34;1s&#34;        //
+</span><span class="c1">// }                    //
+</span><span class="c1">//======================//
+</span></code></pre></div><p>We can manage all kinds of buttons with Button class, but if we want more delicate control, we would have to subdivide the category - like AnimatedButton, SubmitButton, etc.</p>
+<p>For applying OOP effectively, understanding about project structure should preceed.</p>
+<br>
+<h4 id="if--hassimilarobjects---oopapplythis-">If ( hasSimilarObjects ) { OOP.apply(this) }</h4>
+<p>Becuase OOP is for structuring things, it&rsquo;s usage can be more powerful when the project size becomes larger.</p>
+<p>Why? When project becomes larger, it&rsquo;s inevitable that there will be many similar objects which sharing similar property and methods.</p>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/oop/>OOP</a><a class="tag" href=/tags/javascript/>javascript</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/queue-stack/"><span class="li">&larr;</span>Data Structure: Queue n Stack</a></p><p><a class="link" href="/posts/memoize/"><span class="li">&rarr;</span>Understanding Memoize</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
