@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>BFS and DFS&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.0463b7141b237063ffb57ebf04d5d4539abf4436f5ad8cfc591c9181944fbeff356edf1b0eb06a3d46a265d0f1fefaae.css" integrity="sha384-BGO3FBsjcGP/tX6/BNXUU5q/RDb1rYz8WRyRgZRPvv81bt8bDrBqPUaiZdDx/vqu"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">BFS and DFS</h1><p class="article date">Apr 05, 2020</p></section><article class="article markdown-body"><blockquote>BFS and DFS, What makes data structure beautiful.</blockquote>
+<h1 id="concept">Concept</h1>
+<div style="text-align:center;">
+  <img style="border-radius:5px;" src="https://qph.fs.quoracdn.net/main-qimg-7b145b86b4bca7d619028bc160f8332a">
+<p>image from <a href="https://www.quora.com/What-are-the-differences-between-DFS-and-BFS"target="_blank">quora</a></p>
+</div>
+<p>Breadth-frist search proceeds layer by layer, while depth-first search proceeds branch by branch. At first, these concepts were hard to implement in code. But I need to because the algorithm problems that I wanted to solve were closely related to these concepts. In reality, these two concepts are main component for most hard-to-solve algorithm problems.</p>
+<p>So I made this <a href="https://github.com/gippleup/cute-modules/tree/master/data-structure/Graph"target="_blank">cute-module</a>, which I implemented several methods that can be used in Graph. After making this, I felt more comfortable about the concepts.</p>
+<p>If you feel uncomfortable about Graph, BFS, or DFS, try making your own. It will definitely help.</p>
+<p>Truth be told, I haven&rsquo;t understand all the advantages and disadvantages of both search methods. It will naturally float in your mind as you use it more and more. <strong class="orange">First step, is knowing how to build it.</strong></p>
+<h1 id="use-queue-like-ordering-for-bfs">Use queue-like ordering for BFS</h1>
+<p>It become a lot easy to understand to implement BFS or DFS when you understand that they are simply about processing order. When encountering new vertex, DFS search it right away, while BFS search it after covering current layer.</p>
+<p>BFS can be explained like this.</p>
+<ol start="0">
+<li>Visit a new node and check it as visited.</li>
+<li>Get its edges and enqueue them to queue.</li>
+<li>Dequeue a node from queue. Go to Step 0.</li>
+</ol>
+<p><strong>Take your time and <a href="https://www.programiz.com/dsa/graph-bfs"target="_blank">draw it</a>, then you&rsquo;ll get it.</strong></p>
+<p>Below is from my <a href="https://github.com/gippleup/cute-modules/blob/master/data-structure/Graph/Vertex.js"target="_blank">cute-module</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">bfs</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Queue</span><span class="p">();</span>
+  <span class="kr">const</span> <span class="nx">hasChecked</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="kd">let</span> <span class="nx">curVrtx</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="nx">queue</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">(</span><span class="nx">curVrtx</span><span class="p">);</span>
+  <span class="nx">hasChecked</span><span class="p">[</span><span class="nx">curVrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">search</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">curVrtx</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">dequeue</span><span class="p">();</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="nx">curVrtx</span><span class="p">);</span>
+    <span class="nx">curVrtx</span><span class="p">.</span><span class="nx">forEachEdge</span><span class="p">(</span><span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">vrtx</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nx">queue</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">(</span><span class="nx">vrtx</span><span class="p">);</span>
+        <span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">search</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Actually it&rsquo;s not totally same as I said but the to-dos are the same.</p>
+<ol>
+<li><em>Check visited node.</em></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div><ol start="2">
+<li><em>enqueue vertices in an edge.</em></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">curVrtx</span><span class="p">.</span><span class="nx">forEachEdge</span><span class="p">(</span><span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">vrtx</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">queue</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">(</span><span class="nx">vrtx</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ol start="3">
+<li><em>dequeue next vertex from queue.</em></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">curVrtx</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">dequeue</span><span class="p">();</span>
+</code></pre></div><p>That&rsquo;s it.</p>
+<h1 id="use-stack-like-ordering-for-dfs">Use stack-like ordering for DFS</h1>
+<p>DFS is usually more simpler to implement than BFS. If you&rsquo;re accustommed, you may not need stack but will use recursion. But, it will better to understand when you use stack.</p>
+<p>The order to implement DFS is &hellip;</p>
+<ol start="0">
+<li>Visit a new node and check it as visited.</li>
+<li>Get its edges and push them to stack.</li>
+<li>pop a node from stack. Go to Step 0.</li>
+</ol>
+<p>You can see more detailed description <a href="https://www.programiz.com/dsa/graph-dfs"target="_blank">here</a>. And below is my implementation for DFS.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dfs</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">hasChecked</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="kd">let</span> <span class="nx">curVrtx</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">curVrtx</span><span class="p">);</span>
+  <span class="nx">hasChecked</span><span class="p">[</span><span class="nx">curVrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">search</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">curVrtx</span> <span class="o">=</span> <span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="nx">curVrtx</span><span class="p">);</span>
+    <span class="nx">curVrtx</span><span class="p">.</span><span class="nx">forEachEdge</span><span class="p">(</span><span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">vrtx</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">vrtx</span><span class="p">);</span>
+        <span class="nx">hasChecked</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">search</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>What&rsquo;s changed from BFS is simply the data structure that is used for caching work-load. Compare it, if you need. You will find that <strong>queue</strong> has been replaced with <strong>stack</strong>, and that&rsquo;s all.</p>
+<h1 id="-recursion-for-dfsbfs">+) Recursion for DFS/BFS</h1>
+<p>BFS or DFS is not something that is fixed as an method. It&rsquo;s just about searching order. If you&rsquo;re trying to implement BFS or DFS with recursion, you need to pay attention about how each code works. In my opinion, it&rsquo;s less intuitive than using queue or stack. But it can be useful when you finding path.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//&#34;this&#34; is a vertex.
+</span><span class="c1">//This method returns path collection.
+</span><span class="c1"></span><span class="nx">pathTo</span><span class="p">(</span><span class="nx">trgtKey</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//input target vertex key
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">pathArr</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">initialPath</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">];</span> <span class="c1">//add initial vertex to path
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">initialCheckList</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">initialCheckList</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">//add initial vertex as visited
+</span><span class="c1"></span>
+  <span class="kd">function</span> <span class="nx">addPath</span><span class="p">(</span><span class="nx">vertex</span><span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">checkList</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">vertex</span><span class="p">.</span><span class="nx">key</span> <span class="o">!==</span> <span class="nx">trgtKey</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//if curVrtx is not targetVrtx
+</span><span class="c1"></span>      <span class="nx">vertex</span><span class="p">.</span><span class="nx">forEachEdge</span><span class="p">(</span><span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">vrtx</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="c1">//for each out-edge vrtx
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">checkList</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span> <span class="c1">//if the vrtx is not visited
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">newPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span> <span class="c1">//copy path from existing one
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">newCheckList</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">checkList</span><span class="p">);</span> <span class="c1">//copy checkList from existing one
+</span><span class="c1"></span>          <span class="nx">newPath</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">vrtx</span><span class="p">);</span> <span class="c1">//add the vrtx to path
+</span><span class="c1"></span>          <span class="nx">newCheckList</span><span class="p">[</span><span class="nx">vrtx</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">//check the vrtx ad visitied
+</span><span class="c1"></span>          <span class="nx">addPath</span><span class="p">(</span><span class="nx">vrtx</span><span class="p">,</span> <span class="nx">newPath</span><span class="p">,</span> <span class="nx">newCheckList</span><span class="p">);</span> <span class="c1">//repeat the addPath function
+</span><span class="c1"></span>        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">//if curVrtx is the targetVrtx
+</span><span class="c1"></span>      <span class="nx">pathArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span> <span class="c1">//add the path to path collection
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">addPath</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">initialPath</span><span class="p">,</span> <span class="nx">initialCheckList</span><span class="p">);</span> <span class="c1">//initial start
+</span><span class="c1"></span>
+  <span class="k">return</span> <span class="nx">pathArr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>Above code is an example of DFS using recursion. By using recursion, we can easily seperate works for each path. That is, the function generates seperate paths and checklist by itself.</p>
+</article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/graph/>graph</a><a class="tag" href=/tags/queue/>queue</a><a class="tag" href=/tags/hash-table/>hash-table</a><a class="tag" href=/tags/linked-list/>linked-list</a><a class="tag" href=/tags/tree/>tree</a><a class="tag" href=/tags/queue/>queue</a><a class="tag" href=/tags/stack/>stack</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/algorithms/n-queens/"><span class="li">&rarr;</span>N-Queens</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
