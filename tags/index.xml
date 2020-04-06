@@ -7,10 +7,70 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sun, 05 Apr 2020 18:24:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2020 09:35:00 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ajax</title>
+      <link>/tags/ajax/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/ajax/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>api</title>
+      <link>/tags/api/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/api/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>browser</title>
+      <link>/tags/browser/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/browser/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>fetch</title>
+      <link>/tags/fetch/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/fetch/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>/tags/http/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/http/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>server</title>
+      <link>/tags/server/</link>
+      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      
+      <guid>/tags/server/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>data-structure</title>

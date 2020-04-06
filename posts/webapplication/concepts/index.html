@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Server-related Concepts&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.0463b7141b237063ffb57ebf04d5d4539abf4436f5ad8cfc591c9181944fbeff356edf1b0eb06a3d46a265d0f1fefaae.css" integrity="sha384-BGO3FBsjcGP/tX6/BNXUU5q/RDb1rYz8WRyRgZRPvv81bt8bDrBqPUaiZdDx/vqu"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Server-related Concepts</h1><p class="article date">Apr 06, 2020</p></section><article class="article markdown-body"><h1 id="in-short">In short</h1>
+<ol>
+<li>There is <a href="https://en.wikipedia.org/wiki/World_Wide_Web"target="_blank">the Web</a>, which is accessible through <strong class="orange">internet</strong>. It&rsquo;s a giant information system which contains all the resources over the globe and each resources are linked by hyperlinks and URLs.</li>
+<li><abbr title="Interconnected network"><a href="https://en.wikipedia.org/wiki/Internet"target="_blank">Internet</a></abbr> network of networks which enables us to access to WWW resources by using HTTP or HTTPS(This is called protocol). But itself is not user-friendly. What enalbes us to access the Web easily is <strong class="orange">web browsers</strong>.</li>
+<li><a href="https://en.wikipedia.org/wiki/Web_browser#Function"target="_blank">Browser</a> is an application for accessing information on the World Wide Web. <em>When a user reqests a particular website, the web browser retrieves the necessary content from a <strong class="orange">web server</strong> and then displays the resulting web page on the user&rsquo;s device.</em> (<strong>Browser parses our html, css, js file into web content</strong>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Web_server"target="_blank">Web server</a> is server software, or hardware dedicated to running this software, that can satisfy <strong>client</strong> requests on the World Wide Web. A web server processes incoming network requests over HTTP and other related <strong class="orange">protocols</strong>.</li>
+<li><a href="https://en.wikipedia.org/wiki/Client_%28computing%29"target="_blank">Client</a> is a piece of computer hardware or software that accesses a service made available by a server.</li>
+<li><a href="https://en.wikipedia.org/wiki/Communication_protocol"target="_blank">Protocol</a> is a system of rules that allow entities to transmit information via any kind of variation of devices.</li>
+<li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"target="_blank">HTTP</a> is an application protocol for the World Wide Web, where <strong>hypertext</strong> documents include <strong>hyperlinks</strong> to other resources that the user can easily access, for example by a mouse click.</li>
+<li><a href="https://en.wikipedia.org/wiki/Hypertext"target="_blank">Hypertext</a> is text with hyperlinks.</li>
+<li><a href="https://en.wikipedia.org/wiki/Hyperlink"target="_blank">Hyperlink</a>, or a link, is a reference to data that the user can follow by clicking or tapping.</li>
+</ol>
+<h1 id="server-related-concepts">Server-related concepts</h1>
+<ol>
+<li><abbr title="Application programming interface"><a href="https://en.wikipedia.org/wiki/Application_programming_interface"target="_blank">API</a></abbr> is a computing interface to a software component or a system, that defines how other components or systems can use it. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow, etc. For example, this is a <a href="https://pokeapi.co/"target="_blank">pokemon go API</a>.</li>
+<li><abbr title="Asynchronous Javascript and XML"><a href="https://en.wikipedia.org/wiki/Ajax_%28programming%29"target="_blank">AJAX</a></abbr> is a set of web development techiniques using many web technologies on the client side to create asynchronous web applicatons. With Ajax, server can work in the background without interfering with the display and behavior of the existing page.</li>
+</ol>
+<h1 id="browser">Browser</h1>
+<h2 id="components-of-browser">Components of browser</h2>
+<blockquote>
+<div class="center-content">
+<img style="border-radius:5px;" src="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/layers.png">
+</div>
+<ol>
+<li><strong>The user interface</strong>: this includes the address bar, back/forward button, bookmarking menu, etc. Every part of the browser display except the window where you see the requested page.</li>
+<li><strong>The browser engine</strong>: marshals actions between the UI and the rendering engine.</li>
+<li><strong>The rendering engine</strong> : responsible for displaying requested content. For example if the requested content is HTML, the rendering engine parses HTML and CSS, and displays the parsed content on the screen.</li>
+<li><strong>Networking</strong>: for network calls such as HTTP requests, using different implementations for different platform behind a platform-independent interface.</li>
+<li><strong>UI backend</strong>: used for drawing basic widgets like combo boxes and windows. This backend exposes a generic interface that is not platform specific. Underneath it uses operating system user interface methods.</li>
+<li><strong>JavaScript interpreter</strong>. Used to parse and execute JavaScript code.</li>
+<li><strong>Data storage</strong>. This is a persistence layer. The browser may need to save all sorts of data locally, such as cookies. Browsers also support storage mechanisms such as localStorage, IndexedDB, WebSQL and FileSystem.</p>
+— <cite>from <a href="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/"target="_blank">html5rocks</a></cite></li>
+</ol>
+</blockquote>
+<h2 id="flow-of-webkit">Flow of webkit</h2>
+<p>Webkit is a browser engine developed by Apple and primarily used in Safari web browser. Below is WebKit main flow.</p>
+<div class="center-content">
+<img src="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/webkitflow.png">
+</div></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/browser/>browser</a><a class="tag" href=/tags/server/>server</a><a class="tag" href=/tags/api/>api</a><a class="tag" href=/tags/http/>http</a><a class="tag" href=/tags/ajax/>ajax</a><a class="tag" href=/tags/fetch/>fetch</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/bfs-and-dfs/"><span class="li">&rarr;</span>BFS and DFS</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
