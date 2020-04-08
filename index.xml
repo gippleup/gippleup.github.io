@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Posts</title>
       <link>/posts/</link>
-      <pubDate>Mon, 06 Apr 2020 09:35:00 +0900</pubDate>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
       
       <guid>/posts/</guid>
       <description></description>
@@ -25,10 +25,10 @@
     <item>
       <title>About</title>
       <link>/about/</link>
-      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>This blog is dedicated to record my learnings for programming.</description>
+      <description></description>
       
     </item>
     

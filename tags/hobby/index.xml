@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>hobby on Notepadium</title>
+    <link>/tags/hobby/</link>
+    <description>Recent content in hobby on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Wed, 08 Apr 2020 23:39:13 +0900</lastBuildDate>
+    
+        <atom:link href="/tags/hobby/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How I started Programming(2) - Crasher444</title>
+      <link>/posts/projects/crasher444/</link>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/posts/projects/crasher444/</guid>
+      <description>Making Games, it&#39;s one of the best hobbies for making yourself to crave to DESTROY something :)     IT WOULD TAKE SOME TIME FOR LOADING because it&amp;rsquo;s hosted based on netlify free hosting.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

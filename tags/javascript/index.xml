@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Thu, 19 Mar 2020 15:39:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Apr 2020 23:39:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How I started Programming(2) - Crasher444</title>
+      <link>/posts/projects/crasher444/</link>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/posts/projects/crasher444/</guid>
+      <description>Making Games, it&#39;s one of the best hobbies for making yourself to crave to DESTROY something :)     IT WOULD TAKE SOME TIME FOR LOADING because it&amp;rsquo;s hosted based on netlify free hosting.</description>
+      
+    </item>
     
     <item>
       <title>Data Structure: Queue n Stack</title>

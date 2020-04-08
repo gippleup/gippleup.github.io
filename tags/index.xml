@@ -7,10 +7,70 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Mon, 06 Apr 2020 09:35:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Apr 2020 23:39:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>game</title>
+      <link>/tags/game/</link>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/game/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>hobby</title>
+      <link>/tags/hobby/</link>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/hobby/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>/tags/javascript/</link>
+      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/javascript/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>animation</title>
+      <link>/tags/animation/</link>
+      <pubDate>Wed, 08 Apr 2020 17:39:13 +0900</pubDate>
+      
+      <guid>/tags/animation/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>diary</title>
+      <link>/tags/diary/</link>
+      <pubDate>Wed, 08 Apr 2020 17:39:13 +0900</pubDate>
+      
+      <guid>/tags/diary/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>emoticon</title>
+      <link>/tags/emoticon/</link>
+      <pubDate>Wed, 08 Apr 2020 17:39:13 +0900</pubDate>
+      
+      <guid>/tags/emoticon/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>ajax</title>
@@ -208,16 +268,6 @@
       <pubDate>Mon, 23 Mar 2020 14:45:00 +0900</pubDate>
       
       <guid>/tags/binary-search-tree/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>javascript</title>
-      <link>/tags/javascript/</link>
-      <pubDate>Thu, 19 Mar 2020 15:39:13 +0900</pubDate>
-      
-      <guid>/tags/javascript/</guid>
       <description></description>
       
     </item>
