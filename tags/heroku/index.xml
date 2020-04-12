@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>heroku on Notepadium</title>
+    <link>/tags/heroku/</link>
+    <description>Recent content in heroku on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Sat, 11 Apr 2020 15:00:13 +0900</lastBuildDate>
+    
+        <atom:link href="/tags/heroku/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[WebApp] My-Chatter-Box</title>
+      <link>/posts/projects/my-chatter-box/</link>
+      <pubDate>Sat, 11 Apr 2020 15:00:13 +0900</pubDate>
+      
+      <guid>/posts/projects/my-chatter-box/</guid>
+      <description>Hoorray! It&amp;rsquo;s working!
+ You can see the app directly at this link.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

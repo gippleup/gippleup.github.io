@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>[WebApp] My-Chatter-Box&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.e107adcf053736db69b066610488ebf96b7c1edc13fc33da399ea85087f26449e376a905b8bb16c0055f8d7162e61d7a.css" integrity="sha384-4QetzwU3NttpsGZhBIjr&#43;Wt8HtwT/DPaOZ6oUIfyZEnjdqkFuLsWwAVfjXFi5h16"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">[WebApp] My-Chatter-Box</h1><p class="article date">Apr 11, 2020</p></section><article class="article markdown-body"><blockquote>
+<p><strong class="orange">Hoorray!</strong> It&rsquo;s working!</p>
+</blockquote>
+<p>You can see the app directly at this <a href="https://xidious.herokuapp.com/"target="_blank">link</a>.</p>
+<blockquote>
+<p>To be honest, below post has not much infomation. If you wanna learn basics about http, express, node js, I recommends Traversy&rsquo;s crash course. It&rsquo;s short and straight-forward.</p>
+</blockquote>
+<blockquote>
+<p>Taversy&rsquo;s Crash Course</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=fBNz5xF-Kx4"target="_blank">Node js</a>: for http and node js</li>
+<li><a href="https://www.youtube.com/watch?v=L72fhGm1tfE"target="_blank">Express js</a>: for express and express-handlebars</li>
+</ul>
+</blockquote>
+<p>I&rsquo;ve been curious about how I can make a server and make it work. This webApp is a by-product formed while learning server.</p>
+<div class="iframe-fluid">
+  <iframe src="https://xidious.herokuapp.com/" 
+  height="315" width="560" allowfullscreen="" frameborder="0">
+  </iframe>
+</div>
+<h1 id="client-server">Client-Server</h1>
+<p>Not much work needed for client server because heroku has done all the dirty job. What I needed to do was just setting up app to show <strong class="orange">static content</strong>, and <strong class="orange">setting fetch</strong> to listen to database.</p>
+<h2 id="code">Code</h2>
+<h3 id="server-for-static-content">Server for static content</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">// Use static contents
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)));</span>
+
+<span class="kr">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server is listening on port: </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div><p>At first, I used &lsquo;http&rsquo; module, which required me to setting up for each url. I&rsquo;m sure setting up for each url can help curing insomnia. It&rsquo;s super tedius.</p>
+<p>Express was very helpful for setting up a server. It makes codes very simple.</p>
+<p>For example, this code can be shorten</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">url</span> <span class="o">===</span> <span class="s1">&#39;/messages&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">,</span> <span class="s1">&#39;main.html&#39;</span><span class="p">),</span> 
+      <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">});</span>
+      <span class="kd">let</span> <span class="nx">parsedData</span> <span class="o">=</span> <span class="nx">Json</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">));</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">parsedData</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="c1">//similar code repeats for each file
+</span></code></pre></div><p><strong class="orange">like below</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span>
+      <span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">);</span>
+</code></pre></div><h3 id="setting-up-fetch">Setting up fetch</h3>
+<p>Rendering messages and fetching data from database was all for this app.</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">server</span><span class="o">:</span> <span class="s2">&#34;...&#34;</span><span class="p">,</span>
+  <span class="nx">fetch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+  <span class="p">},</span>
+
+  <span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">server</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+      <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">message</span><span class="p">),</span>
+      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;Content-Type&#34;</span> <span class="o">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">();</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">findMsg</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">nameBox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;input#name&#39;</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;textarea#write&#39;</span><span class="p">);</span>
+      <span class="nx">nameBox</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="nx">textBox</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">})</span>
+  <span class="p">},</span>
+
+  <span class="nx">roomDropdown</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">init</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">getNewMsg</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">findMsg</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">clearMessages</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">renderMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">tempData</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">changeRoom</span><span class="p">(</span><span class="nx">roomName</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">state</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">createRoom</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">cancelCreateRoom</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">createMessage</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">sendMessage</span><span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">getNewMsgEvery</span><span class="p">(</span><span class="nx">sec</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+</code></pre></div><h1 id="database-server">Database-Server</h1>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./helper/logger&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">// log request
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="nx">extended</span><span class="o">:</span><span class="kc">false</span><span class="p">}))</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/messages&#39;</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routing/api/messages&#39;</span><span class="p">));</span>
+
+<span class="kr">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server is listening on port: </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div><p>Express was also handy for routing. What I required to do was setting up each url request in seperate files and using them as a module.</p>
+<p>And for database, I used firebase.</p>
+<h1 id="what-i-learnt">What I learnt</h1>
+<p>Setting up a server didn&rsquo;t require much branin power thanks to handy modules. It was more like &lsquo;do this for this task&rsquo; procedure. Things need to be done was specified, and I just needed to fill them up.</p>
+<p>At this point, where I&rsquo;m a novice, I guess that &lsquo;maybe a database is almost all about server&rsquo;.</p>
+</article><section class="article labels"><a class="category" href=/categories/project/>project</a><a class="category" href=/categories/learning/>learning</a><a class="tag" href=/tags/server/>server</a><a class="tag" href=/tags/heroku/>heroku</a><a class="tag" href=/tags/javascript/>javascript</a><a class="tag" href=/tags/webapp/>webApp</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/projects/crasher444/"><span class="li">&rarr;</span>How I started Programming(2) - Crasher444</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
