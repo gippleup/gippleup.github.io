@@ -7,10 +7,90 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sat, 11 Apr 2020 15:00:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 16:30:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>gcloud</title>
+      <link>/tags/gcloud/</link>
+      <pubDate>Sat, 18 Apr 2020 16:30:13 +0900</pubDate>
+      
+      <guid>/tags/gcloud/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>gcloud-function</title>
+      <link>/tags/gcloud-function/</link>
+      <pubDate>Sat, 18 Apr 2020 16:30:13 +0900</pubDate>
+      
+      <guid>/tags/gcloud-function/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>async</title>
+      <link>/tags/async/</link>
+      <pubDate>Thu, 16 Apr 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/async/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>promise</title>
+      <link>/tags/promise/</link>
+      <pubDate>Thu, 16 Apr 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/promise/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>short-concept</title>
+      <link>/tags/short-concept/</link>
+      <pubDate>Thu, 16 Apr 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/short-concept/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>component</title>
+      <link>/tags/component/</link>
+      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/tags/component/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>convert</title>
+      <link>/tags/convert/</link>
+      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/tags/convert/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>html</title>
+      <link>/tags/html/</link>
+      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/tags/html/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>heroku</title>

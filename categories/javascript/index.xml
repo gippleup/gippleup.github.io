@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Mon, 06 Apr 2020 09:35:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 16:30:13 +0900</lastBuildDate>
     
         <atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>First API - sweeptube</title>
+      <link>/posts/api/sweeptube/</link>
+      <pubDate>Sat, 18 Apr 2020 16:30:13 +0900</pubDate>
+      
+      <guid>/posts/api/sweeptube/</guid>
+      <description>Quick note on Puppeteer  When using puppeteer, page.</description>
+      
+    </item>
+    
+    <item>
+      <title>Promise, Async - quick concept</title>
+      <link>/posts/pattern/async-pattern/</link>
+      <pubDate>Thu, 16 Apr 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/posts/pattern/async-pattern/</guid>
+      <description>Promise is constructed using a function which takes resolve and reject as parameter.</description>
+      
+    </item>
     
     <item>
       <title>Server-related Concepts</title>
