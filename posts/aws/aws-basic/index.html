@@ -5,20 +5,40 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">AWS-Basic</h1><p class="article date">May 13, 2020</p></section><article class="article markdown-body"><h1 id="s3">S3</h1>
+    <h1 class="article title">AWS-Basic</h1><p class="article date">May 13, 2020</p></section><article class="article markdown-body"><h1 id="instruction">Instruction</h1>
+<h3 id="s3">S3</h3>
 <ul>
 <li>Client deploy can be done using <code>aws s3 sync &lt;source&gt; s3://&lt;target&gt;</code> on package.json</li>
 </ul>
-<h1 id="ec2">EC2</h1>
+<h3 id="ec2">EC2</h3>
 <ul>
 <li>Beanstalk helps deploying code(recommended), or you can manually update by using git pull(not recommended)</li>
 <li>You can connect to ec2 instance with vscode using Remote-SSH plugin. (Super Great)</li>
 </ul>
-<h1 id="rds">RDS</h1>
+<h3 id="rds">RDS</h3>
 <ul>
 <li>You can connect to RDS using <code>mysql -u &lt;instance-name&gt; --host &lt;end-point&gt; -P &lt;port&gt; -p</code></li>
 </ul>
-</article><section class="article labels"><a class="category" href=/categories/commands/>commands</a><a class="category" href=/categories/quicknote/>quicknote</a><a class="tag" href=/tags/aws/>aws</a><a class="tag" href=/tags/s3/>s3</a><a class="tag" href=/tags/ec2/>ec2</a><a class="tag" href=/tags/rds/>rds</a></section><div class="article share addthis_inline_share_toolbox"></div>
+<h1 id="cli---commands">CLI - Commands</h1>
+<h3 id="s3-1">S3</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">S3Commands</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">makeBucket</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 mb s3://</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span>
+  <span class="nx">listBukets</span><span class="o">:</span> <span class="s1">&#39;aws s3 ls&#39;</span><span class="p">,</span>
+  <span class="nx">listPath</span><span class="o">:</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 ls s3://</span><span class="si">${</span><span class="nx">path</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+  <span class="nx">deleteBucket</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 rb s3://</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">,,</span>
+  <span class="nx">forceDeleteBucket</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 rb s3://</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb"> --force`</span><span class="p">,</span>
+  <span class="nx">copyFile</span><span class="o">:</span> <span class="p">(</span><span class="nx">filepath</span><span class="p">,</span> <span class="nx">targetPath</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 cp </span><span class="si">${</span><span class="nx">filepath</span><span class="si">}</span><span class="sb"> s3://</span><span class="si">${</span><span class="nx">targetPath</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+  <span class="c1">//ExcludeRule and IncludeRule should be written multiple times for each, if there are multiple rules.
+</span><span class="c1"></span>  <span class="nx">syncFile</span><span class="o">:</span> <span class="p">({</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">excludeRule</span><span class="p">,</span> <span class="nx">includeRule</span><span class="p">})</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 sync </span><span class="si">${</span><span class="nx">source</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">target</span><span class="si">}</span><span class="sb"> --delete --exclude &#34;</span><span class="si">${</span><span class="nx">excludeRule</span><span class="si">}</span><span class="sb">&#34; --include &#34;</span><span class="si">${</span><span class="nx">includeRule</span><span class="si">}</span><span class="sb">&#34;`</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="ec2-1">EC2</h3>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">EC2Commands</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">//Don&#39;t forget to `chmod 400 KeyPair.pem` for setting permission.
+</span><span class="c1"></span>  <span class="nx">createKeyPair</span><span class="o">:</span> <span class="p">(</span><span class="nx">keyName</span><span class="p">,</span> <span class="nx">pipeTarget</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws ec2 create-key-pair --key-name </span><span class="si">${</span><span class="nx">keyName</span><span class="si">}</span><span class="sb"> --query &#39;KeyMaterial&#39; --output text &gt; </span><span class="si">${</span><span class="nx">pipeTarget</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+  <span class="nx">descKeyPair</span><span class="o">:</span> <span class="p">(</span><span class="nx">keyName</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws ec2 describe-key-pairs --key-name </span><span class="si">${</span><span class="nx">keyName</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+  <span class="nx">deleteKeyPair</span><span class="o">:</span> <span class="p">(</span><span class="nx">keyName</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws ec2 delete-key-pair --key-name </span><span class="si">${</span><span class="nx">keyName</span><span class="si">}</span><span class="sb">`</span>
+<span class="p">}</span>
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/commands/>commands</a><a class="category" href=/categories/quicknote/>quicknote</a><a class="tag" href=/tags/aws/>aws</a><a class="tag" href=/tags/s3/>s3</a><a class="tag" href=/tags/ec2/>ec2</a><a class="tag" href=/tags/rds/>rds</a></section><div class="article share addthis_inline_share_toolbox"></div>
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/aws/aws-cli/"><span class="li">&larr;</span>AWS CLI COMMANDS</a></p><p><a class="link" href="/posts/writing/news.pick.io/"><span class="li">&rarr;</span>News.pick.io</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
