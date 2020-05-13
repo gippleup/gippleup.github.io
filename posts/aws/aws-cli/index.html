@@ -5,7 +5,8 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">AWS CLI COMMANDS</h1><p class="article date">May 13, 2020</p></section><article class="article markdown-body"><h1 id="s3">S3</h1>
+    <h1 class="article title">AWS CLI COMMANDS</h1><p class="article date">May 13, 2020</p></section><article class="article markdown-body"><p>This is just a few of aws commands, mostly for s3.</p>
+<h1 id="s3">S3</h1>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">S3Commands</span><span class="o">:</span> <span class="p">{</span>
   <span class="nx">makeBucket</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="sb">`aws s3 mb s3://</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span>
   <span class="nx">listBukets</span><span class="o">:</span> <span class="s1">&#39;aws s3 ls&#39;</span><span class="p">,</span>
