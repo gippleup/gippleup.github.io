@@ -300,7 +300,20 @@
 <li>EC2: Simply put, remote computer. You can connect to instance using ssh. VS Code ssh connect is recommended. Simple guide to use: 1) Follow guide on &lsquo;connect&rsquo; tab for instance, 2) Install nodejs on ec2 instance 3) pull project from git 4) Npm install for project 5) Add http to inbound rules 6) Optionally, connect instance to vscode for easy coding.</li>
 <li>RDS: Simple usage. 1) Set up instance, 2) Set up inbound rules, 3) Connect.</li>
 </ul>
-</article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
+<h1 id="git">Git</h1>
+<ul>
+<li>You can set up ssh for convenient authentication. Refer <a href="https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent"target="_blank">this</a></li>
+</ul>
+<pre><code>&lt;!-- Generate ssh key --&gt;
+$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
+&lt;!-- Apply chmod 600 for your private key --&gt;
+$ chmod 600 &quot;filename&quot;
+&lt;!-- Run ssh-agent in the background --&gt;
+$ eval &quot;$(ssh-agent -s)&quot;
+&gt; Agent pid 59566
+&lt;!-- Add your key(replace id_rsa with your file name--&gt;
+$ ssh-add ~/.ssh/id_rsa
+</code></pre></article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/writing/news.pick.io/"><span class="li">&larr;</span>News.pick.io</a></p><p><a class="link" href="/posts/pattern/async-pattern/"><span class="li">&rarr;</span>Promise, Async - quick concept</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
