@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 15:39:13 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 23:39:13 +0900</lastBuildDate>
     
         <atom:link href="/categories/framework/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Quick Notes</title>
+      <link>/posts/writing/quicknotes/</link>
+      <pubDate>Mon, 27 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/posts/writing/quicknotes/</guid>
+      <description>Project Design  Think about possible user interactions first.</description>
+      
+    </item>
     
     <item>
       <title>React - Basic Concepts</title>
@@ -19,6 +29,16 @@
       
       <guid>/posts/react/react-basiccontepts/</guid>
       <description>React itself React is very module-friendly.</description>
+      
+    </item>
+    
+    <item>
+      <title>Redux - Basic Concepts</title>
+      <link>/posts/react/redux-basic-concepts/</link>
+      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
+      
+      <guid>/posts/react/redux-basic-concepts/</guid>
+      <description>What Redux does, essentially.   Redux stores states automatically when actions are dispatched(executed).</description>
       
     </item>
     

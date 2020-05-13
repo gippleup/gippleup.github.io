@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>News.pick.io&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">News.pick.io</h1><p class="article date">Apr 29, 2020</p></section><article class="article markdown-body"><h2 id="motivation">Motivation</h2>
+<ol>
+<li>My brother asked me to make such app, with slight mocking that I would not be able to make such app. I answered &ldquo;Well, that&rsquo;s easy peasy&rdquo;. I started making app.</li>
+<li>I wanted to practice redux. &lsquo;News-pick? There would be quite a lot of data-flow, good.&rsquo;</li>
+</ol>
+<h2 id="span-stylecolord99dfcuser-interactionspan--span-stylecolorgrey-padding-left5px-padding-right5px-border-radius5px-border1px-solid-grey-background-color1a121fdata-flowspan"><span style="color:#d99dfc;">User interaction</span> / <span style="color:grey; padding-left:5px; padding-right:5px; border-radius:5px; border:1px solid grey; background-color:#1a121f">Data flow</span></h2>
+<h4 id="search">Search</h4>
+<h6 id="input-keyword">Input Keyword</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">click</span> <span class="nx">input</span> <span class="nx">box</span> <span class="nx">and</span> <span class="nx">type</span> <span class="nx">keyword</span><span class="p">.</span>
+<span class="cm">/* Inputs are saved to local state. */</span>
+<span class="o">-</span> <span class="nx">When</span> <span class="nx">click</span> <span class="nx">ok</span> <span class="nx">button</span><span class="p">,</span>
+<span class="cm">/* Fetch News for keywords. */</span>
+  <span class="mf">1.</span> <span class="nx">Keyword</span> <span class="nx">is</span> <span class="nx">added</span> <span class="nx">to</span> <span class="nx">keyword</span> <span class="nx">list</span> 
+  <span class="cm">/* Keywords are add to global state */</span>
+  <span class="mf">2.</span> <span class="nx">New</span> <span class="nx">keyword</span> <span class="nx">block</span> <span class="nx">is</span> <span class="nx">generated</span>
+  <span class="cm">/* News blocks are added to global state */</span>
+  <span class="mf">3.</span> <span class="nx">Existing</span> <span class="nx">keyword</span> <span class="nx">block</span> <span class="nx">is</span> <span class="nx">updated</span>
+  <span class="cm">/* News blocks are updated */</span>
+  <span class="cm">/* Use url as item id */</span>
+  <span class="mf">4.</span> <span class="nx">Press</span> <span class="nx">list</span> <span class="nx">is</span> <span class="nx">updated</span>
+  <span class="cm">/* Press list is added to global state */</span>
+  <span class="cm">/* Press that has not been touched,
+</span><span class="cm">      will be automatically updated. */</span>
+  <span class="cm">/* Press that has been touched,
+</span><span class="cm">      will remain filtered if there is news,
+</span><span class="cm">      will be inactive when there&#39;s no news. */</span>
+</code></pre></div><h6 id="manual-update">Manual Update</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">click</span> <span class="nx">update</span> <span class="nx">button</span><span class="p">,</span>
+  <span class="nx">then</span> <span class="nx">existing</span> <span class="nx">keyword</span> <span class="nx">news</span> <span class="nx">are</span> <span class="nx">updated</span><span class="p">.</span>
+  <span class="cm">/* 1. Fetch News for keywords. */</span>
+  <span class="cm">/* 2. News blocks are updated. */</span>
+</code></pre></div><h6 id="set-interval-for-update">Set Interval for Update</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">set</span> <span class="nx">intervals</span> <span class="nx">using</span> <span class="nx">button</span>
+<span class="cm">/* Interval is saved to local state */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">click</span> <span class="nx">ok</span> <span class="nx">button</span> <span class="k">for</span> <span class="nx">completing</span> <span class="nx">setting</span>
+<span class="cm">/* Interval is saved to global state */</span>
+</code></pre></div><h6 id="set-filter-for-news">Set Filter for News</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">each</span> <span class="nx">keyword</span><span class="p">.</span>
+<span class="cm">/* Each toggle is saved to global state[keyword] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">each</span> <span class="nx">press</span><span class="p">.</span>
+<span class="cm">/* Each toggle is saved to global state[press] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">each</span> <span class="nx">tags</span><span class="p">.</span>
+<span class="cm">/* Each toggle is saved to global state[tags] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="s1">&#39;show all&#39;</span> <span class="nx">button</span> <span class="k">for</span> <span class="nx">press</span><span class="o">/</span><span class="nx">keyword</span><span class="p">.</span>
+<span class="cm">/* Each toggle becomes useless and only global filter rules */</span>
+<span class="cm">/* When deactivate show all, each toggle is activated */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">time</span> <span class="nx">filter</span><span class="p">.</span>
+<span class="cm">/* Time filter is saved to global state */</span>
+</code></pre></div><hr>
+<h4 id="news">News</h4>
+<h6 id="read-news-for-keywords">Read News for Keywords</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">toggle</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">then</span> <span class="nx">it</span> <span class="nx">shows</span> <span class="nx">related</span> <span class="nx">news</span><span class="p">.</span>
+<span class="cm">/* Each news block store spread state */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">see</span> <span class="nx">time</span><span class="p">,</span> <span class="nx">press</span><span class="p">,</span> <span class="nx">originallink</span><span class="p">,</span> <span class="nx">etc</span><span class="p">.</span>
+<span class="cm">/* Each news item receives such props[State =&gt; prop] */</span>
+</code></pre></div><h6 id="toggle-news">Toggle News</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">complete</span><span class="p">.</span>
+<span class="cm">/* Completed items are saved to global state[Store: completed] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">hide</span><span class="p">.</span>
+<span class="cm">/* Hidden items are saved to global state with tags[Store: hidden] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">toggle</span> <span class="nx">later</span><span class="p">.</span>
+<span class="cm">/* Items are saved to global state[Store: later] */</span>
+<span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">put</span> <span class="nx">temporal</span> <span class="nx">tags</span><span class="p">.</span>
+<span class="cm">/* Tags are saved to target item[NewsItem: tags], and global state[Store: tags] */</span>
+</code></pre></div><hr>
+<h4 id="subscription">Subscription</h4>
+<h6 id="add-subscription-email">Add Subscription Email</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="nx">add</span> <span class="nx">temporal</span> <span class="nx">subscription</span> <span class="nx">email</span><span class="p">,</span>
+  <span class="nx">by</span> <span class="nx">typing</span> <span class="nx">their</span> <span class="nx">email</span> <span class="nx">and</span> <span class="nx">purpose</span><span class="p">.</span>
+  <span class="cm">/* Email is saved to local state[EmailList: emails] */</span>
+</code></pre></div><h6 id="delete-subscription-email">Delete Subscription Email</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">User</span> <span class="nx">can</span> <span class="k">delete</span> <span class="nx">subscription</span> <span class="nx">email</span><span class="p">,</span>
+  <span class="nx">by</span> <span class="nx">clicking</span> <span class="k">delete</span> <span class="nx">button</span><span class="p">.</span>
+  <span class="cm">/* Email is deleted from local state[EmailList: emails] */</span>
+</code></pre></div><h1 id="bad-trials">Bad Trials</h1>
+<h4 id="scroll-menu-i-should-scroll-to-see-the-menus-damn-its-a-waste-of-time-i-dont-wanna-use-your-app">Scroll Menu; &lsquo;I should scroll to see the menus??? Damn, it&rsquo;s a waste of time! I don&rsquo;t wanna use your app.&rsquo;</h4>
+<ul>
+<li>Description: I made floating menu on the bottom, which required three steps to access menu. 1) Click hamberger, 2) Scroll to find menu icon, 3) Click menu icon.</li>
+<li>Problem: It&rsquo;s inconvenient.</li>
+<li>What I lerned: Major menus should be accessible in two steps.</li>
+</ul>
+</article><section class="article labels"><a class="category" href=/categories/project/>project</a><a class="tag" href=/tags/project/>project</a><a class="tag" href=/tags/react/>react</a><a class="tag" href=/tags/redux/>redux</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/aws/aws-basic/"><span class="li">&larr;</span>AWS-Basic</a></p><p><a class="link" href="/posts/writing/quicknotes/"><span class="li">&rarr;</span>Quick Notes</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

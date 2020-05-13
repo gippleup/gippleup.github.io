@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Redux - Basic Concepts&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Redux - Basic Concepts</h1><p class="article date">Apr 15, 2020</p></section><article class="article markdown-body"><h1 id="what-redux-does-essentially">What Redux does, essentially.</h1>
+<ul>
+<li>
+<p>Redux stores states automatically when actions are dispatched(executed). That&rsquo;s all.</p>
+</li>
+<li>
+<p>In most simple form, store itself is enough for redux. (just for demonstration)</p>
+</li>
+<li>
+<p>let&rsquo;s make simple store which just can do adding a todo.</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createStore</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;redux&#39;</span>
+
+<span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">visibilityFilter</span><span class="o">:</span> <span class="s1">&#39;SHOW_ALL&#39;</span><span class="p">,</span>
+  <span class="nx">todos</span><span class="o">:</span> <span class="p">[],</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">simpleStore</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">((</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;ADD_TODO&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">todos</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">todos</span><span class="o">:</span> <span class="p">[...</span><span class="nx">state</span><span class="p">.</span><span class="nx">todos</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+        <span class="nx">completed</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="p">}]</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">simpleStore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">simpleStore</span><span class="p">.</span><span class="nx">getState</span><span class="p">()))</span>
+<span class="c1">// store.subscribe returns function that can unsubscribe change
+</span><span class="c1">// the function passed to subscribe is executed everytime an action is dispatched by create.dispatch() method.
+</span><span class="c1"></span>
+<span class="nx">simpleStore</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;ADD_TODO&#39;</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;SEE? THIS IS ADDED!&#39;</span>
+<span class="p">})</span>
+
+<span class="cm">/* RESULTING STATE 
+</span><span class="cm">[
+</span><span class="cm">  {
+</span><span class="cm">    text:&#34;SEE? THIS IS ADDED!&#34;,
+</span><span class="cm">    completed:false
+</span><span class="cm">  }
+</span><span class="cm">]
+</span><span class="cm"> */</span>
+</code></pre></div><ul>
+<li>
+<p>The callback function that createStore takes as a parameter, accepts state and action as parameter.</p>
+</li>
+<li>
+<p>When dispatching an action, store execute <code>reducer(curState, action)</code>. Because it pass state automatically, what we need to pass is just information about an action.</p>
+</li>
+</ul>
+<h3 id="what-makes-it-look-difficult">What makes it look difficult?</h3>
+<p>If you go to &ldquo;get started&rdquo; page of redux, you may be confused about wtf is all this boilerplate. Things that makes your brain fuzzy will be these.</p>
+<h6 id="why-they-store-simple-strings-as-constant">Why they store simple strings as constant?</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">ADD_TODO</span> <span class="o">=</span> <span class="s1">&#39;ADD_TODO&#39;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">TOGGLE_TODO</span> <span class="o">=</span> <span class="s1">&#39;TOGGLE_TODO&#39;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">SET_VISIBILITY_FILTER</span> <span class="o">=</span> <span class="s1">&#39;SET_VISIBILITY_FILTER&#39;</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">VisibilityFilters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">SHOW_ALL</span><span class="o">:</span> <span class="s1">&#39;SHOW_ALL&#39;</span><span class="p">,</span>
+  <span class="nx">SHOW_COMPLETED</span><span class="o">:</span> <span class="s1">&#39;SHOW_COMPLETED&#39;</span><span class="p">,</span>
+  <span class="nx">SHOW_ACTIVE</span><span class="o">:</span> <span class="s1">&#39;SHOW_ACTIVE&#39;</span>
+<span class="p">}</span>
+</code></pre></div><p>Why they do this? Typing these things one by one will be mundane and painful. But with variables we can easily get recommendation code from editor.</p>
+<h6 id="why-they-make-each-action-creator">Why they make each action creator?</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nx">ADD_TODO</span><span class="p">,</span>
+    <span class="nx">text</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//CLEAN VERSION
+</span><span class="c1"></span><span class="nx">simpleStore</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">addTodo</span><span class="p">(</span><span class="s1">&#39;SEE? THIS IS ADDED!&#39;</span><span class="p">))</span>
+
+<span class="c1">//MESSY VERSION
+</span><span class="c1"></span><span class="nx">simpleStore</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;ADD_TODO&#39;</span><span class="p">,</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;SEE? THIS IS ADDED!&#39;</span>
+<span class="p">})</span>
+</code></pre></div><p>What&rsquo;s the point of this? It&rsquo;s also for convenience. Those two version in the code, do the same task. It&rsquo;s just for not typing fixed values that is totoally predictable, for example, &lsquo;ADD_TODO&rsquo;. Yes, in simple case, it&rsquo;s just for not typing parenthesis, fixed variable, commas.</p>
+<h6 id="what-the-combinereducers-actually-does">What the combineReducers actually does?</h6>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// REDUCERS FOR ACTION
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">todos</span><span class="p">(</span><span class="nx">todos</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;ADD_TODO&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="cm">/* newTodos */</span>
+    <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;DELETE_TODO&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="cm">/* newTodos */</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">visibilityFilter</span><span class="p">(</span><span class="nx">curFilter</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;SHOW_ALL&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="cm">/* newFilter */</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;COMPLETED&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="cm">/* newFilter */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">// MESSY VERSION1; MERGE ON CREATE
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">simpleStrore</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">((</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">todos</span><span class="o">:</span> <span class="nx">todos</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">todos</span><span class="p">,</span> <span class="nx">action</span><span class="p">),</span>
+    <span class="nx">visibilityFilter</span><span class="o">:</span> <span class="nx">visibilityFilter</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">visibilityFilter</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+
+<span class="c1">// MESSY VERSION2; MERGE BEFORE CREATE
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">todoApp</span><span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">todos</span><span class="o">:</span> <span class="nx">todos</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">todos</span><span class="p">,</span> <span class="nx">action</span><span class="p">),</span>
+    <span class="nx">visibilityFilter</span><span class="o">:</span> <span class="nx">visibilityFilter</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">visibilityFilter</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">simpleStore</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">todoApp</span><span class="p">);</span>
+
+
+<span class="c1">// CLEAN VERSION
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">todoApp</span> <span class="o">=</span> <span class="nx">combineReducers</span><span class="p">({</span>
+  <span class="nx">visibilityFilters</span><span class="p">,</span>
+  <span class="nx">todos</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">simpleStore</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">todoApp</span><span class="p">);</span>
+
+</code></pre></div><p>Messy version2 is equivalent to clean version. What combineReducers does is wrapping functions with object and automating passing parameters.</p>
+</article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/react/react-basiccontepts/"><span class="li">&larr;</span>React - Basic Concepts</a></p><p><a class="link" href="/posts/projects/my-chatter-box/"><span class="li">&rarr;</span>[WebApp] My-Chatter-Box</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

@@ -7,27 +7,107 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 16:30:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2020 21:39:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>gcloud</title>
-      <link>/tags/gcloud/</link>
-      <pubDate>Sat, 18 Apr 2020 16:30:13 +0900</pubDate>
+      <title>aws</title>
+      <link>/tags/aws/</link>
+      <pubDate>Wed, 13 May 2020 21:39:13 +0900</pubDate>
       
-      <guid>/tags/gcloud/</guid>
+      <guid>/tags/aws/</guid>
       <description></description>
       
     </item>
     
     <item>
-      <title>gcloud-function</title>
-      <link>/tags/gcloud-function/</link>
-      <pubDate>Sat, 18 Apr 2020 16:30:13 +0900</pubDate>
+      <title>ec2</title>
+      <link>/tags/ec2/</link>
+      <pubDate>Wed, 13 May 2020 21:39:13 +0900</pubDate>
       
-      <guid>/tags/gcloud-function/</guid>
+      <guid>/tags/ec2/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>rds</title>
+      <link>/tags/rds/</link>
+      <pubDate>Wed, 13 May 2020 21:39:13 +0900</pubDate>
+      
+      <guid>/tags/rds/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>s3</title>
+      <link>/tags/s3/</link>
+      <pubDate>Wed, 13 May 2020 21:39:13 +0900</pubDate>
+      
+      <guid>/tags/s3/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>project</title>
+      <link>/tags/project/</link>
+      <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
+      
+      <guid>/tags/project/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>/tags/react/</link>
+      <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
+      
+      <guid>/tags/react/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>redux</title>
+      <link>/tags/redux/</link>
+      <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
+      
+      <guid>/tags/redux/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>component</title>
+      <link>/tags/component/</link>
+      <pubDate>Mon, 27 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/component/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>convert</title>
+      <link>/tags/convert/</link>
+      <pubDate>Mon, 27 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/convert/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>html</title>
+      <link>/tags/html/</link>
+      <pubDate>Mon, 27 Apr 2020 23:39:13 +0900</pubDate>
+      
+      <guid>/tags/html/</guid>
       <description></description>
       
     </item>
@@ -58,36 +138,6 @@
       <pubDate>Thu, 16 Apr 2020 16:39:13 +0900</pubDate>
       
       <guid>/tags/short-concept/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>component</title>
-      <link>/tags/component/</link>
-      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
-      
-      <guid>/tags/component/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>convert</title>
-      <link>/tags/convert/</link>
-      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
-      
-      <guid>/tags/convert/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>html</title>
-      <link>/tags/html/</link>
-      <pubDate>Wed, 15 Apr 2020 15:39:13 +0900</pubDate>
-      
-      <guid>/tags/html/</guid>
       <description></description>
       
     </item>

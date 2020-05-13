@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Quick Notes&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Quick Notes</h1><p class="article date">Apr 27, 2020</p></section><article class="article markdown-body"><h1 id="project-design">Project Design</h1>
+<ol>
+<li>Think about possible user interactions first.</li>
+<li>Then, think about possible data flow for each interaction.</li>
+<li>Now make data structure prototype.</li>
+<li>Then, think</li>
+</ol>
+<h1 id="express">Express</h1>
+<ul>
+<li>To get body from response, use body-parser.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="nx">extended</span><span class="o">:</span> <span class="kc">false</span><span class="p">}));</span>
+</code></pre></div><ul>
+<li>Async function can be used as request handler.</li>
+<li>You can pass on props by using app.use.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="cm">/* &#39;tools&#39; is custom key. */</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">tools</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">db</span><span class="p">,</span>
+  <span class="p">};</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li>If <code>Content-Type</code> is not specified in response or request, fetched result will be a plain string.</li>
+</ul>
+<h1 id="react">React</h1>
+<ul>
+<li><bold>React component is a closure! Which means <skyblue>variables in a componenet are independent for each rendered component</skyblue>, except states.</bold></li>
+<li>React renders a component whenever its <code>props</code> or <code>state</code> change.</li>
+<li>A component&rsquo;s virtual DOM is rendered, whenever parent component are updated.</li>
+<li>When virtual DOM is different from real DOM, real DOM is re-rendered.</li>
+<li><code>shouldComponentUpdate</code> lifecycle method can help deciding when to render. &hellip;But this is time-consuming. USE REDUX.</li>
+<li>Carefully decide which props to add, else your app would render too much so that it&rsquo;s gonna be slower.</li>
+<li>You can set inner html of element by using prop <code>dangerouslySetInnerHTML</code>.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">p</span> <span class="nx">dangerouslySetInnerHTML</span><span class="o">=</span><span class="p">{{</span><span class="nx">__html</span><span class="o">:</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}}</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
+</code></pre></div><ul>
+<li>Build can be run using serve -s build. (If serve is not installed, &lsquo;npm i serve -g&rsquo;)</li>
+</ul>
+<h1 id="react-redux">React-Redux</h1>
+<ul>
+<li>DESIGN FLOW: USER INTERACTION =&gt; DATA FLOW =&gt; USER INTERFACE, OK? If not, you may have to RE-WRITE your code A LOT.</li>
+<li>It takes lots of wastes of energy for changing data structure after setting up components.</li>
+<li>To prevent perplexing ourselves, state and dispatch should be handled on specific range of code in a component, so that when we have to change data structure or reducer, we can just check for these range.</li>
+<li>Do a lot of planning before actually coding it, for user interaction and data flow.</li>
+<li>To prevent waste of time, we need to specify which interactions are primary and which are not. Focus on primary interaction. Set them as your objective.</li>
+<li>React-Redux re-render a component when target state has changed.</li>
+<li>React-Redux determine if target state has changed by comparing <code>prevState === newState</code>. Mutating prevState doesn&rsquo;t update component.</li>
+<li>You can use immutable.js for making sure that states are properly updated. But it is followed by inconvinience to use <code>get()</code> and <code>set()</code> accessor.</li>
+<li>If initial state is set when creating a store, it would ignore initial state of each reducer. (Seperating initial states for each reducer is better, so don&rsquo;t put initial state when creating store)</li>
+</ul>
+<h1 id="redux">Redux</h1>
+<ul>
+<li>You can create your own middleware like this:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">customMiddleware</span> <span class="o">=</span> <span class="nx">store</span> <span class="p">=&gt;</span> <span class="nx">next</span> <span class="p">=&gt;</span> <span class="nx">action</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Middleware triggered:&#34;</span><span class="p">,</span> <span class="nx">action</span><span class="p">);</span>
+  <span class="nx">next</span><span class="p">(</span><span class="nx">action</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><h1 id="asyncawaitpromise">async/await/promise</h1>
+<ul>
+<li><code>await {Promise}</code> returns resolved value, if you want to check error, use try{}catch{}.</li>
+<li>await Promise.all(promieseArr) returns array which contains resolved values for each promise.</li>
+</ul>
+<h1 id="regular-expression">Regular Expression</h1>
+<ul>
+<li>You can specify character group with <code>[targetStrings]</code>. For example, <code>[abc]</code> would match for character that is one of &lsquo;a&rsquo;, &lsquo;b&rsquo;, or &lsquo;c&rsquo;.</li>
+<li>If you want to specify that previous group is repeated use <code>\1</code>. For example, <code>([abc])\1</code> would match for character that is one of &lsquo;aa&rsquo;, &lsquo;bb&rsquo;, or &lsquo;cc&rsquo;.</li>
+<li>example: aaaaaabbbccdddsseerewwqqwwdddfffffffffffff11112222343214</li>
+<li>regexp: <code>/([a-z])\1\1\1\1/g</code></li>
+<li>matches: <code>aaaaa</code> abbbccdddsseerewwqqwwddd<code>fffff</code> <code>fffff</code> fff11112222343214</li>
+</ul>
+<h1 id="mysql">mysql</h1>
+<ul>
+<li>
+<p><code>&quot;Client does not support authentication protocol requested by server; consider upgrading MySQL client&quot;</code>. If this error occurs, check <a href="https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server"target="_blank">this</a>.</p>
+</li>
+<li>
+<p>Most sql request can be written in form of this.</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="p">{</span><span class="nx">db</span><span class="p">}</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">tools</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">sql</span> <span class="o">=</span> <span class="sb">`SELECT * FROM posts WHERE id=</span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span>
+  <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li>With CASCADE option for foreign key, when referenced table row is deleted, referencing table row is also deleted.</li>
+</ul>
+<h3 id="table-users">TABLE (users)</h3>
+<table>
+<thead>
+<tr>
+<th>userId</th>
+<th>username</th>
+<th>user_createdAt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>John</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Smith</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Jane</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Michael</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+</tbody>
+</table>
+<h3 id="table-rooms">TABLE (rooms)</h3>
+<table>
+<thead>
+<tr>
+<th>roomId</th>
+<th>roomname</th>
+<th>room_createdAt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>waterpool</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>2</td>
+<td>mountain</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>3</td>
+<td>sky</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+<tr>
+<td>4</td>
+<td>calendar</td>
+<td>2020-05-06 13:57:24</td>
+</tr>
+</tbody>
+</table>
+<h3 id="table-messages">TABLE (messages)</h3>
+<table>
+<thead>
+<tr>
+<th>messageId</th>
+<th>content</th>
+<th>wroteAt</th>
+<th>userId</th>
+<th>roomId</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>This is a test content</td>
+<td>2020-05-06 13:57:24</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Maybe work</td>
+<td>2020-05-06 13:57:24</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Another message</td>
+<td>2020-05-06 13:57:24</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>In the messages table, userId and roomId are foreign keys. Let&rsquo;s say &lsquo;on delete&rsquo; option is set to cascade. If we execute this query <code><code>DELETE FROM rooms WHERE roomId = 1</code></code>, messages table will be like this.</p>
+<table>
+<thead>
+<tr>
+<th>messageId</th>
+<th>content</th>
+<th>wroteAt</th>
+<th>userId</th>
+<th>roomId</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Another message</td>
+<td>2020-05-06 13:57:24</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h1 id="html">HTML</h1>
+<ul>
+<li>To disable enter on form, use prevent default.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">onEnter</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">charCode</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h1 id="csseffect">CSS(EFFECT)</h1>
+<ul>
+<li>You can blur gradiently with this syntax.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span>
+  <span class="nx">webkitMaskImage</span><span class="o">:</span> <span class="sb">`linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,0))`</span><span class="p">,</span> <span class="c1">//This mask current element.
+</span><span class="c1"></span>  <span class="nx">position</span><span class="o">:</span><span class="s1">&#39;absolute&#39;</span><span class="p">,</span>
+  <span class="nx">left</span><span class="o">:</span> <span class="s1">&#39;0px&#39;</span><span class="p">,</span>
+  <span class="nx">backdropFilter</span><span class="o">:</span> <span class="s1">&#39;blur(3px)&#39;</span><span class="p">,</span> <span class="c1">//This applies effect for behind image.
+</span><span class="c1"></span>  <span class="nx">width</span><span class="o">:</span><span class="s1">&#39;100px&#39;</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span><span class="s1">&#39;100px &#39;</span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+</code></pre></div><h1 id="cssgrid">CSS(GRID)</h1>
+<ul>
+<li>Use <code>align-items:&lsquo;center'</code> for aligning items to center vertically.</li>
+</ul>
+<h1 id="cssflex">CSS(FLEX)</h1>
+<ul>
+<li>Use <code>justify-content:&lsquo;space-between'</code> for distributing items to the left and right.</li>
+</ul>
+<h1 id="html-1">HTML</h1>
+<ul>
+<li>You can select element by using this lines of code.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+
+<span class="cm">/* for example, below code set cursor to name input box, after submit. */</span>
+<span class="kr">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">addSubscription</span><span class="p">({[</span><span class="nx">curInput</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span><span class="o">:</span><span class="nx">curInput</span><span class="p">.</span><span class="nx">email</span><span class="p">})</span>
+  <span class="nx">setCurInput</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">email</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">})</span>
+  <span class="nx">nameInput</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+  <span class="nx">nameInput</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><h1 id="session-cookie">Session, Cookie</h1>
+<ul>
+<li>node modules, &lsquo;express-session&rsquo; and &lsquo;cookie-parser&rsquo; are used for session and cookie management.</li>
+<li>Express session and cookie parser can be set up like this.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="nx">session</span><span class="p">({</span>
+    <span class="nx">secret</span><span class="o">:</span> <span class="s1">&#39;SomeSalt&#39;</span><span class="p">,</span>
+    <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cookieParser</span><span class="p">(</span><span class="s1">&#39;someSalt&#39;</span><span class="p">));</span>
+</code></pre></div><ul>
+<li>
+<p>Using Express session, you can set values easily like <code>req.session.key = value</code></p>
+</li>
+<li>
+<p>Session Id can be accessed like req.sessionID, and cookie can be accessed like req.cookies.</p>
+</li>
+<li>
+<p>Cookie can be sent like res.cookie(&lsquo;key&rsquo;, &lsquo;value&rsquo;), and this can be sent before writing response head. Client can access to received cookie by &lsquo;document.cookie&rsquo;.</p>
+</li>
+<li>
+<p>Cookie doesn&rsquo;t have to be sent every time, once it&rsquo;s sent to client, unless user delete cookies, it remains there as it is.</p>
+</li>
+</ul>
+<h1 id="aws">AWS</h1>
+<ul>
+<li>S3: Simple Storage Service. For simple usage, just upload react build files, set pulic acess allowed, make policy for s3.</li>
+<li>EC2: Simply put, remote computer. You can connect to instance using ssh. VS Code ssh connect is recommended. Simple guide to use: 1) Follow guide on &lsquo;connect&rsquo; tab for instance, 2) Install nodejs on ec2 instance 3) pull project from git 4) Npm install for project 5) Add http to inbound rules 6) Optionally, connect instance to vscode for easy coding.</li>
+<li>RDS: Simple usage. 1) Set up instance, 2) Set up inbound rules, 3) Connect.</li>
+</ul>
+</article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/writing/news.pick.io/"><span class="li">&larr;</span>News.pick.io</a></p><p><a class="link" href="/posts/pattern/async-pattern/"><span class="li">&rarr;</span>Promise, Async - quick concept</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
