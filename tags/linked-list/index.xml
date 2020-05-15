@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sun, 05 Apr 2020 18:24:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 17:24:00 +0900</lastBuildDate>
     
         <atom:link href="/tags/linked-list/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cors-Basic</title>
+      <link>/posts/cors/cors-basic/</link>
+      <pubDate>Fri, 15 May 2020 17:24:00 +0900</pubDate>
+      
+      <guid>/posts/cors/cors-basic/</guid>
+      <description>Credentials: &amp;lsquo;inclue&amp;rsquo; ? If you want to persist session, you need to set request to include credentials.</description>
+      
+    </item>
     
     <item>
       <title>BFS and DFS</title>

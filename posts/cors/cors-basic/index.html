@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Cors-Basic&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Cors-Basic</h1><p class="article date">May 15, 2020</p></section><article class="article markdown-body"><h1 id="credentials-inclue-">Credentials: &lsquo;inclue&rsquo; ?</h1>
+<p>If you want to persist session, you need to set request to include credentials.</p>
+<h3 id="case-login">Case: Login</h3>
+<ul>
+<li>
+<p>With session, we can manage user connection in server-side, which is expected to be more secure than sending cookies to client. Though it has disadvantage that as more users enter, the more memory is required, using session is more recommended way for persisting connection.</p>
+</li>
+<li>
+<p>To maintain session connection, we need to set request propery &lsquo;credentials&rsquo; to &lsquo;include&rsquo;, which enables us to send cookies(which include session id), basic http auth, etc..), for every other request that we send to server. Yes, for every request.</p>
+</li>
+<li>
+<p>For example, below code show basic login request.</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:4000/signin&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+        <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">credentials</span><span class="o">:</span> <span class="s1">&#39;include&#39;</span><span class="p">,</span> <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;This!!!
+</span><span class="c1"></span>        <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+          <span class="nx">email</span><span class="p">,</span>
+          <span class="nx">password</span>
+        <span class="p">})</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">userinfo</span><span class="p">()))</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+      <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>To use session for our express app, we can use express-session</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="nx">session</span><span class="p">({</span>
+    <span class="nx">secret</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SESSION_SECRET</span><span class="p">,</span>
+    <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">)</span>
+</code></pre></div><ul>
+<li>
+<p>And then we need to set server-side setting to accept cors. When we set &lsquo;credentials&rsquo; to <code>true</code>, we need to specify origin because when client request with option <code>{credentials: &lsquo;include&rsquo;}</code>, browser requires Access-Control-Allow-Origin not to be &lsquo;*&rsquo;</p>
+</li>
+<li>
+<p>So, we need to set both header options (<code>'Access-Control-Allow-Credentials'</code> and &lsquo;Access-Control-Allow-Origin'</code>) like this. With express, we can set it like this.</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// With res.writeHead
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">({</span>
+    <span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="o">:</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span><span class="o">:</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+
+<span class="c1">// With res.setHeader
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>
+<span class="p">})</span>
+
+
+<span class="c1">// With cors module(which you can install through npm i cors)
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="nx">cors</span><span class="p">({</span>
+    <span class="nx">origin</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="s1">&#39;POST&#39;</span><span class="p">],</span>
+    <span class="nx">credentials</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">})</span>
+<span class="p">)</span>
+</code></pre></div><h1 id="mode-no-cors-">mode: &lsquo;no-cors&rsquo; ?</h1>
+<h3 id="case-logout">Case: Logout</h3>
+<ul>
+<li>
+<p>If you want to let your server redirect and detroy session when user logout, you need to set reqeust mode to &lsquo;no-cors&rsquo;, which ensures that header is just simple header and blocking access to resulting <code>Response</code>.</p>
+</li>
+<li>
+<p>For more detailed explanation, see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/mode"target="_blank">MDN</a></p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// Client-side
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">signOut</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:4000/signout&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>      
+      <span class="nx">credentials</span><span class="o">:</span> <span class="s1">&#39;include&#39;</span><span class="p">,</span>
+      <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;no-cors&#39;</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// Server-side
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">reqHandler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">signOutController</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">userid</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;WHO THE HELL ARE YOU&#39;</span><span class="p">)</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/graph/>graph</a><a class="tag" href=/tags/queue/>queue</a><a class="tag" href=/tags/hash-table/>hash-table</a><a class="tag" href=/tags/linked-list/>linked-list</a><a class="tag" href=/tags/tree/>tree</a><a class="tag" href=/tags/queue/>queue</a><a class="tag" href=/tags/stack/>stack</a><a class="tag" href=/tags/data-structure/>data-structure</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/aws/aws-basic/"><span class="li">&rarr;</span>AWS-Basic</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>
