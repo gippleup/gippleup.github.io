@@ -7,10 +7,80 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Fri, 15 May 2020 17:24:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 16:39:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mocha</title>
+      <link>/tags/mocha/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/mocha/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>/tags/mysql/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/mysql/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>sequelize</title>
+      <link>/tags/sequelize/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/sequelize/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>server</title>
+      <link>/tags/server/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/server/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>server design</title>
+      <link>/tags/server-design/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/tags/server-design/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>hobby</title>
+      <link>/tags/hobby/</link>
+      <pubDate>Sun, 17 May 2020 13:51:00 +0900</pubDate>
+      
+      <guid>/tags/hobby/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>OOP</title>
+      <link>/tags/oop/</link>
+      <pubDate>Sun, 17 May 2020 13:51:00 +0900</pubDate>
+      
+      <guid>/tags/oop/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>data-structure</title>
@@ -233,16 +303,6 @@
     </item>
     
     <item>
-      <title>server</title>
-      <link>/tags/server/</link>
-      <pubDate>Sat, 11 Apr 2020 15:00:13 +0900</pubDate>
-      
-      <guid>/tags/server/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>webApp</title>
       <link>/tags/webapp/</link>
       <pubDate>Sat, 11 Apr 2020 15:00:13 +0900</pubDate>
@@ -258,16 +318,6 @@
       <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
       
       <guid>/tags/game/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>hobby</title>
-      <link>/tags/hobby/</link>
-      <pubDate>Wed, 08 Apr 2020 23:39:13 +0900</pubDate>
-      
-      <guid>/tags/hobby/</guid>
       <description></description>
       
     </item>
@@ -373,16 +423,6 @@
     </item>
     
     <item>
-      <title>OOP</title>
-      <link>/tags/oop/</link>
-      <pubDate>Wed, 25 Mar 2020 15:51:00 +0900</pubDate>
-      
-      <guid>/tags/oop/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>prototype</title>
       <link>/tags/prototype/</link>
       <pubDate>Wed, 25 Mar 2020 15:51:00 +0900</pubDate>
@@ -418,6 +458,26 @@
       <pubDate>Mon, 23 Mar 2020 14:45:00 +0900</pubDate>
       
       <guid>/tags/binary-search-tree/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>construct3</title>
+      <link>/tags/construct3/</link>
+      <pubDate>Mon, 23 Mar 2020 14:12:00 +0900</pubDate>
+      
+      <guid>/tags/construct3/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>developing game</title>
+      <link>/tags/developing-game/</link>
+      <pubDate>Mon, 23 Mar 2020 14:12:00 +0900</pubDate>
+      
+      <guid>/tags/developing-game/</guid>
       <description></description>
       
     </item>

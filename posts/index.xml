@@ -7,10 +7,40 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Fri, 15 May 2020 17:24:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 16:39:13 +0900</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learnt from first project</title>
+      <link>/posts/server/learnt-from-first-project/</link>
+      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
+      
+      <guid>/posts/server/learnt-from-first-project/</guid>
+      <description>What I Learnt Good job  Made solid agreement on redux structure.</description>
+      
+    </item>
+    
+    <item>
+      <title>Sequelize</title>
+      <link>/posts/database/sequlize/</link>
+      <pubDate>Wed, 20 May 2020 00:30:00 +0900</pubDate>
+      
+      <guid>/posts/database/sequlize/</guid>
+      <description>QuickNotes  You can set database character set and collation when initializing sequelize.</description>
+      
+    </item>
+    
+    <item>
+      <title>Algebra</title>
+      <link>/posts/math/algebra/</link>
+      <pubDate>Sun, 17 May 2020 13:51:00 +0900</pubDate>
+      
+      <guid>/posts/math/algebra/</guid>
+      <description>Trigonometric function Radian  The angle for a arc, which has length of r, is called radian.</description>
+      
+    </item>
     
     <item>
       <title>Cors-Basic</title>
@@ -171,6 +201,16 @@
       
       <guid>/posts/data-structure/binary-search-tree/</guid>
       <description>Binary Search is stable and fast.</description>
+      
+    </item>
+    
+    <item>
+      <title>Construct 3 - Basics</title>
+      <link>/posts/hobby/construct3/</link>
+      <pubDate>Mon, 23 Mar 2020 14:12:00 +0900</pubDate>
+      
+      <guid>/posts/hobby/construct3/</guid>
+      <description>Adding Runtime Object in Construct3   You can define runtime object with runtime.</description>
       
     </item>
     

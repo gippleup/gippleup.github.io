@@ -34,6 +34,10 @@
 </code></pre></div><ul>
 <li>If <code>Content-Type</code> is not specified in response or request, fetched result will be a plain string.</li>
 </ul>
+<h1 id="express-1">Express</h1>
+<ul>
+<li>When you encounter <code>EADDRINUSE</code> error, it means that the port number is alaredy in use. You can find which process is using the port, by <code>sudo lsof -i &ldquo;PortNumber&quot;</code>, and <code>kill -9 &ldquo;ProcessNumber&rdquo;</li>
+</ul>
 <h1 id="react">React</h1>
 <ul>
 <li><bold>React component is a closure! Which means <skyblue>variables in a componenet are independent for each rendered component</skyblue>, except states.</bold></li>
@@ -313,7 +317,29 @@ $ eval &quot;$(ssh-agent -s)&quot;
 &gt; Agent pid 59566
 &lt;!-- Add your key(replace id_rsa with your file name--&gt;
 $ ssh-add ~/.ssh/id_rsa
-</code></pre></article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
+</code></pre><h1 id="js-development-tools-for-small-project">JS Development Tools for small project</h1>
+<h3 id="browserify">Browserify</h3>
+<ul>
+<li>
+<p>Browserify is convenient for testing small scripts with browser. With browserify, you can easily watch how your code working, in the browser console.</p>
+</li>
+<li>
+<p>You need three packages: 1) browserify, watchify, browserify-livereload</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">npm</span> <span class="nx">i</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">browserify</span>
+<span class="nx">npm</span> <span class="nx">i</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">watchify</span>
+<span class="nx">npm</span> <span class="nx">i</span> <span class="o">-</span><span class="nx">D</span> <span class="nx">browserify</span><span class="o">-</span><span class="nx">livereload</span>
+</code></pre></div><ul>
+<li>Then, in your package.json, add this line.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;watch&#34;</span><span class="p">:</span> <span class="s2">&#34;watchify -p [ browserify-livereload --host 127.0.0.1 --port 1337 ] main.js -o bundle.js&#34;</span><span class="p">,</span>
+<span class="p">}</span><span class="err">,</span>
+</code></pre></div><ul>
+<li>Done, now when you save your file, browserify will automatically detect change and update like react.</li>
+</ul>
+</article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/writing/news.pick.io/"><span class="li">&larr;</span>News.pick.io</a></p><p><a class="link" href="/posts/pattern/async-pattern/"><span class="li">&rarr;</span>Promise, Async - quick concept</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 

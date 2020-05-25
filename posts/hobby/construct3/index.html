@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Construct 3 - Basics&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Construct 3 - Basics</h1><p class="article date">Mar 23, 2020</p></section><article class="article markdown-body"><h1 id="adding-runtime-object-in-construct3">Adding Runtime Object in Construct3</h1>
+<ul>
+<li>
+<p>You can define runtime object with <code>runtime.setInstanceClass(Class)</code>. This method can onle called in <code>runOnStartup</code> function, before any instances have been created.</p>
+</li>
+<li>
+<p>The class that is used for <code>runtime.setInstanceClass(Class)</code> should extends from IspriteInstance.</p>
+</li>
+<li>
+<p>Steps to add your own class</p>
+</li>
+</ul>
+<ol>
+<li>Create Your Class using <code>extends ISpriteInstance</code></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">MonsterInstance</span> <span class="kr">extends</span> <span class="nx">ISpriteInstance</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ol start="2">
+<li>Set the instance class using runtime.object.OBJECT_NAME.setInstanceClass(INSTANCE_CLASS);</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">runOnStartup</span><span class="p">(</span><span class="nx">async</span> <span class="nx">runtime</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">runtime</span><span class="p">.</span><span class="nx">objects</span><span class="p">.</span><span class="nx">monster</span><span class="p">.</span><span class="nx">setInstanceClass</span><span class="p">(</span><span class="nx">PlayerInstance</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div><ol start="3">
+<li>Customize the class with your own properties and methods.</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">MonsterInstance</span> <span class="kr">extends</span> <span class="nx">ISpriteInstance</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">health</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="nx">g_monsterSpeed</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">static</span> <span class="nx">Create</span><span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runtime</span><span class="p">.</span><span class="nx">objects</span><span class="p">.</span><span class="nx">Monster</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span>
+      <span class="s2">&#34;Main&#34;</span><span class="p">,</span> <span class="c1">//layer name or index is required
+</span><span class="c1"></span>      <span class="mi">1500</span><span class="p">,</span> <span class="nx">runtime</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1024</span> <span class="c1">// x and y
+</span><span class="c1"></span>    <span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">move</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">dt</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">dt</span><span class="p">;</span> <span class="c1">// IObjectClass can refer back to runtime, using this.runtime;
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">playerInst</span> <span class="o">=</span> <span class="nx">g_playerInstance</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">angle</span><span class="p">)</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">angle</span><span class="p">)</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="nx">dt</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">playerInst</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">IsOutsideLayout</span><span class="p">(</span><span class="k">this</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">angle</span> <span class="o">=</span> <span class="nx">angleTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">playerInst</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">playerInst</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">distanceTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">playerInst</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">playerInst</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">angleToPlayer</span> <span class="o">=</span> <span class="nx">angleTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">playerInst</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">angle</span> <span class="o">=</span> <span class="nx">angleRotate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">angle</span><span class="p">,</span> <span class="nx">angleToPlayer</span><span class="p">,</span> <span class="nx">toRadians</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">testOverlap</span><span class="p">(</span><span class="nx">playerInst</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">playerInst</span><span class="p">.</span><span class="nx">detroy</span><span class="p">();</span>
+
+        <span class="nx">g_playerInstance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="nx">g_gameOverTextInstance</span><span class="p">.</span><span class="nx">isVisible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">DestroyWithExplosion</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">Explosion</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">objects</span><span class="p">.</span><span class="nx">Explosion</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">explosionInstance</span> <span class="o">=</span> <span class="nx">Explosion</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span>
+      <span class="s2">&#34;Main&#34;</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span>
+    <span class="p">)</span>
+    <span class="nx">explosionInstance</span><span class="p">.</span><span class="nx">angleDegrees</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">360</span><span class="p">;</span>
+    <span class="nx">g_score</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">destory</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h3 id="some-takeaways-from-the-example">Some takeaways from the example.</h3>
+<ul>
+<li>IObjectClass can refer back to runtime, using this.runtime.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">SomeInstanceClass</span> <span class="kr">extends</span> <span class="nx">ISpriteInstance</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="nx">someMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">dt</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">dt</span> <span class="c1">// This refers runtime.
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>
+<p>Runtime.dt is approximately value of 1/60. If you cosole.log(runtime.dt), you may see value like <code>0.016675999999999476</code>. It represents time passed since the last frame, in seconds.</p>
+</li>
+<li>
+<p>IObjectClass instance has <code>createInstance</code> method, which accepts (layerNameOrIndex, x, y) as parameters.</p>
+</li>
+<li>
+<p>IObjectClass represents an object class in the project. An ObjectClass can have multiple instances created, which are represented by IWorldInstance scripts interface if it appears in a layout, otherwise the IInstance interface.</p>
+</li>
+<li>
+<p>IWorldInstance represents a single instance of an object type that appears in a layout.</p>
+</li>
+<li>
+<p>IInstance script interface represents a single instance of an object type.</p>
+</li>
+<li>
+<p>IObjectClass =&gt; (Instantiation) =&gt; IInstance =&gt; (Render) =&gt; IWorldInstance.</p>
+</li>
+<li>
+<p><code>IsOutsideLayout(instance)</code> is a function that is defined in global, so that you can use it anywhere.</p>
+</li>
+<li>
+<p><code>toRadians(degree)</code> returns converted radius from the degree. It&rsquo;s defined in global scope.</p>
+</li>
+<li>
+<p><code>angleRotate()</code> is a function that is defined in global scope. It accepts (angle1, angle2, diff) as parameter.</p>
+</li>
+</ul>
+<h1 id="system-functions-which-defined-in-global-scope">System Functions, which defined in global scope.</h1>
+<ul>
+<li>toRadians(degree): convert degree in radian.</li>
+<li>angleRotate(angle1, angle2, diff): return changed angle. (all parameters are radian)</li>
+</ul>
+</article><section class="article labels"><a class="category" href=/categories/hobby/>hobby</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/construct3/>construct3</a><a class="tag" href=/tags/developing-game/>developing game</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/data-structure/binary-search-tree/"><span class="li">&larr;</span>Data Structure: Binary Search Tree(BST)</a></p><p><a class="link" href="/posts/data-structure/tree/"><span class="li">&rarr;</span>Data Structure: Tree</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

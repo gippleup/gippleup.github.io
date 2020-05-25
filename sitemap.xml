@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://gippleup.github.io/categories/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/server/learnt-from-first-project/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/mocha/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/mysql/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/sequelize/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/server/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/server/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/server-design/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/</loc><lastmod>2020-05-24T16:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/database/</loc><lastmod>2020-05-20T00:30:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/orm/</loc><lastmod>2020-05-20T00:30:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/database/sequlize/</loc><lastmod>2020-05-20T00:30:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/math/algebra/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/algebra/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/hobby/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/math/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/oop/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/concept/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/concepts/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/cors/cors-basic/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
@@ -9,10 +26,8 @@
     <loc>https://gippleup.github.io/tags/hash-table/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/javascript/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/linked-list/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/posts/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/queue/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/stack/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/tree/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/aws/</loc><lastmod>2020-05-13T21:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/aws/aws-basic/</loc><lastmod>2020-05-13T21:39:13+09:00</lastmod></url><url>
@@ -43,10 +58,8 @@
     <loc>https://gippleup.github.io/tags/heroku/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/javascript/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/learning/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/server/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/webapp/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/game/</loc><lastmod>2020-04-08T23:39:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/hobby/</loc><lastmod>2020-04-08T23:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/projects/crasher444/</loc><lastmod>2020-04-08T23:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/animation/</loc><lastmod>2020-04-08T17:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/diary/</loc><lastmod>2020-04-08T17:39:13+09:00</lastmod></url><url>
@@ -66,14 +79,17 @@
     <loc>https://gippleup.github.io/tags/puzzle/</loc><lastmod>2020-04-02T11:42:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/inheritance/</loc><lastmod>2020-03-25T15:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/oop/inheritance-patterns/</loc><lastmod>2020-03-25T15:51:00+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/oop/</loc><lastmod>2020-03-25T15:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/prototype/</loc><lastmod>2020-03-25T15:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/sorting/</loc><lastmod>2020-03-25T13:15:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/time-complexity/</loc><lastmod>2020-03-25T13:15:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/time-complexity/</loc><lastmod>2020-03-25T13:15:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/binary-search-tree/</loc><lastmod>2020-03-23T14:45:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/binary-search-tree/</loc><lastmod>2020-03-23T14:45:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/hobby/construct3/</loc><lastmod>2020-03-23T14:12:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/construct3/</loc><lastmod>2020-03-23T14:12:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/tree/</loc><lastmod>2020-03-23T14:12:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/developing-game/</loc><lastmod>2020-03-23T14:12:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/hobby/</loc><lastmod>2020-03-23T14:12:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/graph/</loc><lastmod>2020-03-23T13:00:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/hash-table/</loc><lastmod>2020-03-22T22:30:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/data-structure/linked-list/</loc><lastmod>2020-03-22T22:00:13+09:00</lastmod></url><url>
