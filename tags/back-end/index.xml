@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>back-end on Notepadium</title>
+    <link>/tags/back-end/</link>
+    <description>Recent content in back-end on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Sat, 30 May 2020 09:30:13 +0900</lastBuildDate>
+    
+        <atom:link href="/tags/back-end/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[2Weeks-Project] Nolgoship</title>
+      <link>/posts/projects/nolgoship/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/posts/projects/nolgoship/</guid>
+      <description>Intro Recently, I had opportunity to participate in two-week project with two colleagues.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>[2Weeks-Project] Nolgoship&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">[2Weeks-Project] Nolgoship</h1><p class="article date">May 30, 2020</p></section><article class="article markdown-body"><h1 id="intro">Intro</h1>
+<p>Recently, I had opportunity to participate in two-week project with two colleagues. I took back-end position and helped colleagues to understand redux and to fix errors. This post is for taking notes what I&rsquo;ve learnt during the the project.</p>
+<h1 id="links">Links</h1>
+<div class="myLinkContainer">
+  <div class="mylink">
+    <h3>Repositories</h3>
+    <a target="_blank" href="https://github.com/gippleup/nolgoship-server/tree/dev">Server</a>
+    <a target="_blank" href="https://github.com/gippleup/nolgoship-client/tree/dev">Client</a>
+  </div>
+  <div class="mylink">
+    <h3>Deploy</h3>
+    <a target="_blank" href="http://nolgoship.s3-website.ap-northeast-2.amazonaws.com/login">Site</a>
+  </div>
+</div>
+<h1 id="i-back-end">I. Back-end</h1>
+<h3 id="1-server">1. Server</h3>
+<h5 id="1-server-should-have-its-own-interface">1) Server should have its own interface</h5>
+<h5 id="3-design-api-before-writing-code">3) Design api before writing code.</h5>
+<h5 id="2-dont-be-strained-to-api">2) Don&rsquo;t be strained to api</h5>
+<h3 id="2-database">2. Database</h3>
+<h5 id="1-raw-query-is-better-for-complex-querying">1) Raw query is better for complex querying</h5>
+<h1 id="ii-front-end">II. Front-end</h1>
+<h3 id="1-react">1. React</h3>
+<h5 id="1-second-parameter-for-codeuseeffectcode-is-target-listeners">1) Second parameter for <code>useEffect</code> is target listeners.</h5>
+<h3 id="2-redux">2. Redux</h3>
+<h5 id="1-thunk-actions-can-be-called-in-two-ways">1) Thunk actions can be called in two ways.</h5>
+<h3 id="3-css">3. CSS</h3>
+<h5 id="1-some-css-worth-studying">1) Some CSS worth studying.</h5>
+<h5 id="2-flex-props-can-be-applied-to-grid">2) Flex props can be applied to grid.</h5>
+<h1 id="iii-git">III. Git</h1>
+<h3 id="1-commit">1. Commit</h3>
+<h5 id="1-commit-is-for-tracking-changes">1) Commit is for tracking changes.</h5>
+<h5 id="2-write-after-writing-1">2) //Write After writing 1)</h5>
+<h3 id="2-branch">2. Branch</h3>
+<h5 id="1-branching-is-for-seperating-changes">1) Branching is for seperating changes.</h5>
+<h3 id="3-merge">3. Merge</h3>
+<h5 id="1-merge-is-just-a-trans-branch-pushpull">1) Merge is just a trans-branch push/pull.</h5>
+<h1 id="iv-team-work">IV. Team-work</h1>
+<h3 id="1-communication">1. Communication</h3>
+<h5 id="1-basic-of-teamwork-is-respecting-colleagues">1) Basic of teamwork is respecting colleagues.</h5>
+<h5 id="2-feedback-should-have-clear-content-unless-its-a-joke">2) Feedback should have clear content, unless it&rsquo;s a joke.</h5>
+<h3 id="2-collaboration">2. Collaboration</h3>
+<h5 id="1-the-part-where-parties-join-is-the-core-of-teamwork">1) The part where parties join is the core of teamwork.</h5>
+<style>
+  .myLinkContainer{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .mylink > a {
+    min-width: fit-content;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bolder;
+    padding:0.5rem 1rem;
+    height: 3rem;
+    background-color: midnightblue;
+    color: lightgrey;
+    border-radius: 20px;
+    margin: 0 0.2rem;
+    transition-duration: 500ms;
+    z-index: 0
+  }
+
+  .mylink>a:hover{
+    color: white;
+    background-color: slateblue;
+    z-index: 10;
+    transition-duration: 200ms;
+    box-shadow: 0 5px 20px dodgerblue;
+  }
+</style>
+</article><section class="article labels"><a class="category" href=/categories/project/>project</a><a class="category" href=/categories/learning/>learning</a><a class="tag" href=/tags/server/>server</a><a class="tag" href=/tags/back-end/>back-end</a><a class="tag" href=/tags/front-end/>front-end</a><a class="tag" href=/tags/react/>react</a><a class="tag" href=/tags/redux/>redux</a><a class="tag" href=/tags/js/>js</a><a class="tag" href=/tags/css/>css</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/css/flexbox/"><span class="li">&rarr;</span>Flex Box</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

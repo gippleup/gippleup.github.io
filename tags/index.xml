@@ -7,10 +7,90 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sun, 24 May 2020 16:39:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 09:30:13 +0900</lastBuildDate>
     
         <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>back-end</title>
+      <link>/tags/back-end/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/back-end/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>css</title>
+      <link>/tags/css/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/css/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>front-end</title>
+      <link>/tags/front-end/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/front-end/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>js</title>
+      <link>/tags/js/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/js/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>/tags/react/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/react/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>redux</title>
+      <link>/tags/redux/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/redux/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>server</title>
+      <link>/tags/server/</link>
+      <pubDate>Sat, 30 May 2020 09:30:13 +0900</pubDate>
+      
+      <guid>/tags/server/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>flex</title>
+      <link>/tags/flex/</link>
+      <pubDate>Wed, 27 May 2020 12:39:13 +0900</pubDate>
+      
+      <guid>/tags/flex/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>mocha</title>
@@ -38,16 +118,6 @@
       <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
       
       <guid>/tags/sequelize/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>server</title>
-      <link>/tags/server/</link>
-      <pubDate>Sun, 24 May 2020 16:39:13 +0900</pubDate>
-      
-      <guid>/tags/server/</guid>
       <description></description>
       
     </item>
@@ -198,26 +268,6 @@
       <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
       
       <guid>/tags/project/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>react</title>
-      <link>/tags/react/</link>
-      <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
-      
-      <guid>/tags/react/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>redux</title>
-      <link>/tags/redux/</link>
-      <pubDate>Wed, 29 Apr 2020 11:45:13 +0900</pubDate>
-      
-      <guid>/tags/redux/</guid>
       <description></description>
       
     </item>

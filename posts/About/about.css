@@ -1,0 +1,14 @@
+.profileImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: url(https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);
+  background-size: 230%;
+  background-position: center;
+  transition-duration: 200ms;
+}
+
+.profileImg:hover {
+  box-shadow: 0 3px 20px dodgerblue;
+}
+
