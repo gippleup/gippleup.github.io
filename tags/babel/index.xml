@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Notepadium</title>
-    <link>/</link>
-    <description>Recent content on Notepadium</description>
+    <title>babel on Notepadium</title>
+    <link>/tags/babel/</link>
+    <description>Recent content in babel on Notepadium</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
     <lastBuildDate>Sat, 30 May 2020 17:00:13 +0900</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/babel/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Posts</title>
-      <link>/posts/</link>
+      <title>Setup for Small Project</title>
+      <link>/posts/projects/smallsetup/</link>
       <pubDate>Sat, 30 May 2020 17:00:13 +0900</pubDate>
       
-      <guid>/posts/</guid>
-      <description></description>
+      <guid>/posts/projects/smallsetup/</guid>
+      <description>//project structure project \__build \__node_modules \__src index.</description>
       
     </item>
     

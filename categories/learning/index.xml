@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sat, 30 May 2020 09:30:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 17:00:13 +0900</lastBuildDate>
     
         <atom:link href="/categories/learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setup for Small Project</title>
+      <link>/posts/projects/smallsetup/</link>
+      <pubDate>Sat, 30 May 2020 17:00:13 +0900</pubDate>
+      
+      <guid>/posts/projects/smallsetup/</guid>
+      <description>//project structure project \__build \__node_modules \__src index.</description>
+      
+    </item>
     
     <item>
       <title>[2Weeks-Project] Nolgoship</title>

@@ -36,7 +36,7 @@
 </ul>
 <h1 id="express-1">Express</h1>
 <ul>
-<li>When you encounter <code>EADDRINUSE</code> error, it means that the port number is alaredy in use. You can find which process is using the port, by <code>sudo lsof -i &ldquo;PortNumber&quot;</code>, and <code>kill -9 &ldquo;ProcessNumber&rdquo;</li>
+<li>When you encounter <code>EADDRINUSE</code> error, it means that the port number is alaredy in use. You can find which process is using the port, by <code>sudo lsof -i &ldquo;PortNumber&quot;</code>, and <code>kill -9 &ldquo;ProcessNumber&quot;</code></li>
 </ul>
 <h1 id="react">React</h1>
 <ul>
@@ -350,6 +350,58 @@ $ ssh-add ~/.ssh/id_rsa
   <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;email&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;email&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;email&#34;</span> <span class="na">required</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div><h1 id="build-tool">Build tool</h1>
+<h3 id="babel">Babel</h3>
+<ul>
+<li>If you want to make web-app using node modules, you can use this syntax. To build you application, you need to install babel modules.</li>
+</ul>
+<pre><code>npm i -D webpack webpack-dev-server babel-core babel-loader babel-preset-env @babel/core @babel/preset-env
+</code></pre><ul>
+<li>To build files, we need to add a line of script in package.json</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;webpack&#34;</span><span class="p">,</span>
+<span class="p">}</span><span class="err">,</span>
+</code></pre></div><ul>
+<li>To update bundle automatically, we need this script</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;start&#34;</span><span class="p">:</span> <span class="s2">&#34;webpack-dev-server --output-public-path=/build/&#34;</span>
+<span class="p">}</span><span class="err">,</span>
+</code></pre></div><ul>
+<li>
+<p>To use fetch, we need <code>@babel/polyfill</code>.</p>
+</li>
+<li>
+<p>Below is full config.</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//webpack.config.js
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">entry</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s2">&#34;@babel/polyfill&#34;</span><span class="p">,</span>
+      <span class="s2">&#34;./src/app.js&#34;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">output</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&#34;build&#34;</span><span class="p">),</span>
+    <span class="nx">filename</span><span class="o">:</span> <span class="s2">&#34;./bundle.js&#34;</span>
+  <span class="p">},</span>
+  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">rules</span><span class="o">:</span> <span class="p">[{</span>
+      <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.js?$/</span><span class="p">,</span>
+      <span class="nx">exclude</span><span class="o">:</span> <span class="sr">/node_mudules/</span><span class="p">,</span>
+      <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;babel-loader&#34;</span><span class="p">,</span>
+      <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">presets</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">]</span>
+      <span class="p">},</span>
+    <span class="p">}],</span>
+  <span class="p">},</span>
+  <span class="nx">mode</span><span class="o">:</span> <span class="s2">&#34;development&#34;</span>
+<span class="p">}</span>
 </code></pre></div></article><section class="article labels"><a class="category" href=/categories/front-end/>front-end</a><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/framework/>framework</a><a class="category" href=/categories/react/>react</a><a class="tag" href=/tags/component/>component</a><a class="tag" href=/tags/convert/>convert</a><a class="tag" href=/tags/html/>html</a></section><div class="article share addthis_inline_share_toolbox"></div>
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/writing/news.pick.io/"><span class="li">&larr;</span>News.pick.io</a></p><p><a class="link" href="/posts/pattern/async-pattern/"><span class="li">&rarr;</span>Promise, Async - quick concept</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
