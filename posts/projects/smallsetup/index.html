@@ -17,7 +17,7 @@
 <ul>
 <li>This setup is for using node modules in simple html. You can achieve this by using webpack and babel.</li>
 </ul>
-<h1 id="steps">Steps</h1>
+<h1 id="minimal-setup-for-simple-html-based-node-app">Minimal Setup for simple html-based node app.</h1>
 <ol>
 <li>Install webpack and babel</li>
 </ol>
@@ -72,7 +72,36 @@
 <p>npm run build</p>
 </li>
 </ol>
-</article><section class="article labels"><a class="category" href=/categories/project/>project</a><a class="category" href=/categories/learning/>learning</a><a class="tag" href=/tags/webpack/>webpack</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/setup/>setup</a></section><div class="article share addthis_inline_share_toolbox"></div>
+<h1 id="minimal-setup-for-react-app">Minimal Setup for React App</h1>
+<ol>
+<li>Do the same as above.</li>
+<li>Add JSX and css-loader.</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//From This; no jsx test, no react-preset
+</span><span class="c1"></span><span class="p">{</span>
+  <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.js?$/</span><span class="p">,</span>
+  <span class="nx">exclude</span><span class="o">:</span> <span class="sr">/node_mudules/</span><span class="p">,</span>
+  <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;babel-loader&#34;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">presets</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1">//To This; jsx added to test, preset for react has been added.
+</span><span class="c1"></span><span class="p">{</span>
+  <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(js|jsx)?$/</span><span class="p">,</span>
+  <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;babel-loader&#34;</span><span class="p">,</span>
+  <span class="nx">exclude</span><span class="o">:</span> <span class="sr">/node_modules/</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">presets</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">,</span> <span class="s2">&#34;@babel/preset-react&#34;</span><span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">},</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//Add new rule for css
+</span><span class="c1"></span><span class="p">{</span>
+  <span class="nx">test</span><span class="o">:</span> <span class="sr">/.css$/i</span><span class="p">,</span>
+  <span class="nx">use</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;style-loader&#39;</span><span class="p">,</span> <span class="s1">&#39;css-loader&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/project/>project</a><a class="category" href=/categories/learning/>learning</a><a class="tag" href=/tags/webpack/>webpack</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/setup/>setup</a></section><div class="article share addthis_inline_share_toolbox"></div>
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/projects/nolgoship/"><span class="li">&rarr;</span>[2Weeks-Project] Nolgoship</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">©2020 Notepadium.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
