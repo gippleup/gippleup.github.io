@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>WebSocket&nbsp;&ndash;&nbsp;Notepadium</title><link rel="stylesheet" href="/css/core.min.445ad9b8978a27ab03bc45ad391c01a0ca013da34fc9e2774bff810ffd25d9aff00599787bc13f1186244d980b2ef8dc.css" integrity="sha384-RFrZuJeKJ6sDvEWtORwBoMoBPaNPyeJ3S/&#43;BD/0l2a/wBZl4e8E/EYYkTZgLLvjc"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Notepadium</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about/">About</a><a class="nav item" href="https://gohugo.io/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">My Past and Future</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">WebSocket</h1><p class="article date">Jun 03, 2020</p></section><article class="article markdown-body"><h1 id="lesson">Lesson</h1>
+<ol>
+<li>Browser native WebSocket object is quite difficult to implement because of the part for transmitting data.</li>
+</ol>
+<ul>
+<li>The part that requires handshake is easy. Concatenate client ws-key and magic string, create hash using sha1 and encode using base64. set a few headers and send response code with 101(which indicate that protocol has changed(from http:// to ws://))</li>
+<li>But the part that required for trasmitting data&hellip; It may took one or two day. Unfortunately, I don&rsquo;t have enough time for that. So, I searched ws-related modules.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//You can do handshake with below code.
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">socketKey</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">&#39;sec-websocket-key&#39;</span><span class="p">];</span>
+  <span class="kr">const</span> <span class="nx">magicString</span> <span class="o">=</span> <span class="s2">&#34;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&#34;</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">accept</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">concat</span> <span class="o">=</span> <span class="nx">key</span> <span class="o">+</span> <span class="nx">magicString</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">concat</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">hash</span>
+  <span class="p">}</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s2">&#34;Upgrade&#34;</span><span class="p">,</span> <span class="s2">&#34;websocket&#34;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s2">&#34;Connection&#34;</span><span class="p">,</span> <span class="s2">&#34;Upgrade&#34;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s2">&#34;Sec-WebSocket-Accept&#34;</span><span class="p">,</span> <span class="nx">accept</span><span class="p">(</span><span class="nx">socketKey</span><span class="p">));</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">101</span><span class="p">).</span><span class="nx">end</span><span class="p">(</span><span class="s2">&#34;Success&#34;</span><span class="p">);</span>
+</code></pre></div><ol start="2">
+<li>&ldquo;websocket&rdquo; module is for browser, &ldquo;ws&rdquo; module doesn&rsquo;t work on browser.</li>
+</ol>
+<ul>
+<li>After trying &ldquo;ws&rdquo; module to get work on browser, I found it doesn&rsquo;t work on browser. &ldquo;websocket&rdquo; module does work.</li>
+</ul>
+<h1 id="basic-connections-for-websocket">Basic connections for websocket</h1>
+<ol>
+<li>Client</li>
+</ol>
+<ul>
+<li>Client uses native websocket object.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://localhost:5000/chat&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">messages</span><span class="p">,</span> <span class="nx">setMessages</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">curInput</span><span class="p">,</span> <span class="nx">setInput</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;You&#39;re connected, human&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">(</span><span class="nx">incoming</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newMessages</span> <span class="o">=</span> <span class="nx">incoming</span><span class="p">.</span><span class="nx">data</span>
+    <span class="nx">setMessages</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">newMessages</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="kr">const</span> <span class="nx">sendMessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+    <span class="nx">setInput</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">messages</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">message</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">i</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;)}</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+        <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">curInput</span><span class="p">)</span>
+      <span class="p">}}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">curInput</span><span class="p">}</span> <span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+          <span class="nx">setInput</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+        <span class="p">}}</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;Put your message, human&#34;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;Send&#34;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span><span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="err">/form&gt;</span>
+    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div><ol start="2">
+<li>Server</li>
+</ol>
+<ul>
+<li>Server uses &ldquo;ws&rdquo; module. With ws module, connecting websocket is a piece of a cake.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cors&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="kr">const</span> <span class="nx">ws</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ws&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">wss</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ws</span><span class="p">.</span><span class="nx">Server</span><span class="p">({</span><span class="nx">noServer</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+
+<span class="kr">const</span> <span class="nx">messages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Hell yeah&#34;</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">clients</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">())</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/chat&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">wss</span><span class="p">.</span><span class="nx">handleUpgrade</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">alloc</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nx">onSocketConnect</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">onSocketConnect</span><span class="p">(</span><span class="nx">ws</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">clients</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">ws</span><span class="p">);</span>
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">message</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="nx">clients</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">client</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">messages</span><span class="p">))</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">clients</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">ws</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`App is listening on http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="p">})</span>
+
+</code></pre></div></article><section class="article labels"><a class="category" href=/categories/concepts/>concepts</a><a class="category" href=/categories/javascript/>javascript</a><a class="tag" href=/tags/server/>server</a><a class="tag" href=/tags/websocket/>websocket</a><a class="tag" href=/tags/client/>client</a></section><div class="article share addthis_inline_share_toolbox"></div>
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=gippleup" async></script></div><section class="article navigation"><p><a class="link" href="/posts/projects/modurun/"><span class="li">&larr;</span>[4Weeks-Project] Modurun</a></p><p><a class="link" href="/posts/projects/smallsetup/"><span class="li">&rarr;</span>Setup for Small Project</a></p></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></div>
+</body>
+
+</html>

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Sat, 30 May 2020 17:00:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 15:00:13 +0900</lastBuildDate>
     
         <atom:link href="/categories/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[4Weeks-Project] Modurun</title>
+      <link>/posts/projects/modurun/</link>
+      <pubDate>Wed, 01 Jul 2020 15:00:13 +0900</pubDate>
+      
+      <guid>/posts/projects/modurun/</guid>
+      <description>Lots of things have done during 4weeks project, but not much thing has been learnt during the project.</description>
+      
+    </item>
     
     <item>
       <title>Setup for Small Project</title>

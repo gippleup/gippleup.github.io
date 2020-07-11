@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>client on Notepadium</title>
+    <link>/tags/client/</link>
+    <description>Recent content in client on Notepadium</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Wed, 01 Jul 2020 15:00:13 +0900</lastBuildDate>
+    
+        <atom:link href="/tags/client/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[4Weeks-Project] Modurun</title>
+      <link>/posts/projects/modurun/</link>
+      <pubDate>Wed, 01 Jul 2020 15:00:13 +0900</pubDate>
+      
+      <guid>/posts/projects/modurun/</guid>
+      <description>Lots of things have done during 4weeks project, but not much thing has been learnt during the project.</description>
+      
+    </item>
+    
+    <item>
+      <title>WebSocket</title>
+      <link>/posts/websocket/websocket/</link>
+      <pubDate>Wed, 03 Jun 2020 21:35:00 +0900</pubDate>
+      
+      <guid>/posts/websocket/websocket/</guid>
+      <description>Lesson  Browser native WebSocket object is quite difficult to implement because of the part for transmitting data.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

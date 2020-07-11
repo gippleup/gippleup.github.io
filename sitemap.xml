@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://gippleup.github.io/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/projects/modurun/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/client/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/codestates/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/javascript/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/learning/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/project/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/</loc><lastmod>2020-07-01T15:00:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/</loc><lastmod>2020-07-01T00:00:00+00:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/about/</loc><lastmod>2020-07-01T00:00:00+00:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/concept/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/concepts/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/categories/javascript/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/server/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/websocket/websocket/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/tags/websocket/</loc><lastmod>2020-06-03T21:35:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/babel/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/learning/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/posts/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/project/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/setup/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/projects/smallsetup/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/webpack/</loc><lastmod>2020-05-30T17:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/projects/nolgoship/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/back-end/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
@@ -17,8 +28,6 @@
     <loc>https://gippleup.github.io/tags/js/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/react/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/redux/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/server/</loc><lastmod>2020-05-30T09:30:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/concept/</loc><lastmod>2020-05-27T12:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/css/</loc><lastmod>2020-05-27T12:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/flex/</loc><lastmod>2020-05-27T12:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/css/flexbox/</loc><lastmod>2020-05-27T12:39:13+09:00</lastmod></url><url>
@@ -36,12 +45,10 @@
     <loc>https://gippleup.github.io/tags/hobby/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/categories/math/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/oop/</loc><lastmod>2020-05-17T13:51:00+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/concepts/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/cors/cors-basic/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/data-structure/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/graph/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/hash-table/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/categories/javascript/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/linked-list/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/queue/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/stack/</loc><lastmod>2020-05-15T17:24:00+09:00</lastmod></url><url>
@@ -69,7 +76,6 @@
     <loc>https://gippleup.github.io/posts/react/react-basiccontepts/</loc><lastmod>2020-04-15T15:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/react/redux-basic-concepts/</loc><lastmod>2020-04-15T15:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/heroku/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/tags/javascript/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/projects/my-chatter-box/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/webapp/</loc><lastmod>2020-04-11T15:00:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/game/</loc><lastmod>2020-04-08T23:39:13+09:00</lastmod></url><url>
@@ -78,7 +84,6 @@
     <loc>https://gippleup.github.io/tags/diary/</loc><lastmod>2020-04-08T17:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/emoticon/</loc><lastmod>2020-04-08T17:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/projects/emoticons/</loc><lastmod>2020-04-08T17:39:13+09:00</lastmod></url><url>
-    <loc>https://gippleup.github.io/posts/about/about/</loc><lastmod>2020-04-08T00:00:00+00:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/ajax/</loc><lastmod>2020-04-06T09:35:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/api/</loc><lastmod>2020-04-06T09:35:00+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/tags/browser/</loc><lastmod>2020-04-06T09:35:00+09:00</lastmod></url><url>
@@ -110,6 +115,7 @@
     <loc>https://gippleup.github.io/tags/memoize/</loc><lastmod>2020-03-16T15:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/memoize/</loc><lastmod>2020-03-16T15:39:13+09:00</lastmod></url><url>
     <loc>https://gippleup.github.io/posts/my-first-post/</loc><lastmod>2020-03-15T21:39:13+09:00</lastmod></url><url>
+    <loc>https://gippleup.github.io/posts/about/</loc></url><url>
     <loc>https://gippleup.github.io/posts/cute-module/spreader/</loc></url><url>
     <loc>https://gippleup.github.io/tags/d3/</loc></url><url>
     <loc>https://gippleup.github.io/posts/data-visualization/d3js-basic/</loc></url><url>
